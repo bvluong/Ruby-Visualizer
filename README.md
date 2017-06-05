@@ -19,17 +19,18 @@ Users will be able to:
 
 ### Technologies
 
-+ Vue.js
++ Vue.js / Vuex
 + Ruby on Rails
 + binding_of_caller
-+ tracepoint
-+ webpack
-+ babel
-+ npm
++ Tracepoint
++ Webpack
++ Babel
++ Yarn
 + vue-ace-editor
 + HTML / CSS
++ Axios
 
-Ruby Visualizer will be a one page application built with a Vue frontend and a Rails backend. Users will input code into a Vue component, which will then be passed to Rails via AJAX request for parsing. The code will be received in a controller and then sent to a code evaluator function to be parsed and formatted. The evaluator will obtain the stack frames for each line of code and store a snapshot of the current variables. The series of snapshots will be put into a JSON object and passed back to the frontend state. The frontend state will handle displaying each snapshot as the user moves through their code.  
+Ruby Visualizer will be a one page application built with a Vue frontend and a Rails backend. Users will input code into a Vue component, which will then be passed to Rails via Axios request for parsing. The code will be received in a controller and then sent to a code evaluator function to be parsed and formatted. The evaluator will obtain the stack frames for each line of code and store a snapshot of the current variables. The series of snapshots will be put into a JSON object and passed back to the frontend state. The frontend state will handle displaying each snapshot as the user moves through their code.  
 
 #### Challenges
 
@@ -63,7 +64,7 @@ Audrey's primary responsibilities will be:
 - Create evaluator algorithm to return snapshots of stack frames
 - Create display component with Vue
 - Implement Ace Text Editor on Vue component
-- Handle AJAX responses from backend
+- Handle Axios responses from backend
 - Write the repo's production README
 
 
@@ -73,7 +74,7 @@ Bryant's primary responsibilities will be:
 - Create evaluator algorithm to return snapshots of stack frames
 - Create display component with Vue
 - Create header and footer components with Vue
-- Handle AJAX requests from frontend
+- Handle Axios requests from frontend
 
 ### Implementation Timeline
 
@@ -86,7 +87,7 @@ Bryant's primary responsibilities will be:
 
 - Setup Ace Editor to render on our webpage. (Bryant)
 - Format information submitted by the Ace Editor. (Audrey)
-- Create actions on Vue to pass an AJAX request to backend. (Audrey)
+- Create actions on Vue to pass an Axios request to backend. (Audrey)
 
 **Day 3**: Finish the evaluator algorithm and backend to parse information and return JSON object with data desired.
 

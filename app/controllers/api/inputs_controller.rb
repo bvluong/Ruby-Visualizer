@@ -6,7 +6,6 @@ class Api::InputsController < ApplicationController
   def create
     littleEval = Eval.new(params[:input])
     littleEval.trace
-    p littleEval.answer
     render json: littleEval.answer
   end
 
@@ -22,16 +21,15 @@ class Eval
     @state = {}
     @count = 0
     @stackcount = 0
-    @answer = Hash.new {|h,k| h[k] = []}
+    @answer = Hash.new
   end
 
   def evaluate
     begin
       eval(@code)
-  rescue
-    p @answer
-  end
-
+    rescue
+      p @answer
+    end
   end
 
   def trace
@@ -45,26 +43,14 @@ class Eval
     end
   end
 
-  def printsomething
-    @y = 0
-    (20..25).step do |x|
-      @y += x
-    end
-    return @y
-  end
-
   def retrieve_variables(lineno)
     @stackcount += 1
-    array = []
+    object = {}
     binding.of_caller(2).eval('local_variables').each do |var|
-      # p var
-      # p binding.of_caller(2).eval('p ' + var.to_s)
-      array << {var => binding.of_caller(3).eval('p ' + var.to_s)}
-      array << {"lineno" => lineno}
+      object[var] = binding.of_caller(3).eval(var.to_s)
     end
-    @answer[@stackcount] << array
-    # p @answer
-    # p @stackcount
+    object["lineno"] = lineno
+    @answer[@stackcount] = object
   end
 
 end
