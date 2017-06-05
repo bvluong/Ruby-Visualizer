@@ -39,9 +39,12 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style scoped>
 p {
   font-size: 2em;
   text-align: center;
+}
+button{
+  width: 500px
 }
 </style>
