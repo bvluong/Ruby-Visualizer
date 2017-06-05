@@ -39,17 +39,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-.background{
-  width: 500px
-}
-
-.test{
-  width: 100%;
-}
-</style>

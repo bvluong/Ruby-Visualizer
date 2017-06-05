@@ -1,26 +1,15 @@
 <template>
   <div id="app">
-    <Header></Header>
+    <Banner></Banner>
     <CodeInput></CodeInput>
   </div>
 </template>
 
 <script>
 import CodeInput from '../components/code_input'
-import Header from '../components/header'
+import Banner from '../components/banner'
 
 export default {
-  components: { CodeInput, Header }
+  components: { CodeInput, Banner }
 }
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-
-#app{
-  background-color: blue;
-}
-</style>
