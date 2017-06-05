@@ -1,7 +1,7 @@
 <template lang="html">
   <div id='editor' class='test'>
     <editor v-model="userInput" @init="editorInit();" lang="ruby" theme="chrome" width="500" height="100"></editor>
-    <button type="button" v-bind:class="{background: background}" name="button"
+    <button type="button" name="button"
       @click="submitCode(userInput)">
     </button>
     <span>{{code}}</span>
@@ -25,7 +25,6 @@ export default {
           return x+y
       end
       calc(1,1)`,
-      background: true,
     }
   },
   components: { Editor },
