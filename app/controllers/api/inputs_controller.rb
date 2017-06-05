@@ -44,13 +44,30 @@ class Eval
   end
 
   def retrieve_variables(lineno)
-    @stackcount += 1
-    object = {}
-    binding.of_caller(2).eval('local_variables').each do |var|
-      object[var] = binding.of_caller(3).eval(var.to_s)
+    count = 2
+    unless ["trace", "evaluate"].include?(grabMethodName(count))
+      @stackcount += 1
+      object = {}
+      object["lineno"] = lineno
+
+      until grabMethodName(count) == "evaluate"
+        variableInfo = {}
+        variableInfo['depth'] = count
+
+        binding.of_caller(count).eval('local_variables').each do |var|
+          variableInfo[var] = binding.of_caller(count+1).eval(var.to_s)
+        end
+
+        object[grabMethodName(count)] = variableInfo
+        count += 1
+      end
+
+      @answer["frame#{@stackcount}"] = object
     end
-    object["lineno"] = lineno
-    @answer[@stackcount] = object
+  end
+
+  def grabMethodName(count)
+    binding.of_caller(count+1).eval('__method__').to_s
   end
 
 end
