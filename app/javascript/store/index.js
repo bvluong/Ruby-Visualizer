@@ -13,9 +13,6 @@ const mutations = {
   submitCode (state, { data }) {
     console.log(data.data);
     state.code = data + 'abcd';
-  },
-  increment (state) {
-    state.count++
   }
 };
 
@@ -23,8 +20,7 @@ const actions = {
   submitCode: ({ commit }, code) => {
     return axios.post('/api/inputs', {
       input: code }).then( response => commit('submitCode', {data: response}) );
-  },
-  increment: ({ commit }) => commit('increment')
+  }
 };
 
 
