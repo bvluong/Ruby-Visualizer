@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <p>{{ message }}</p>
-    <editor></editor>
+    <CodeInput></CodeInput>
   </div>
 </template>
 
 <script>
-import Editor from '../editor'
+import CodeInput from '../components/code_input'
 
 export default {
   data: function () {
@@ -14,7 +14,7 @@ export default {
       message: "Hello Vue!"
     }
   },
-  components: { Editor }
+  components: { CodeInput }
 }
 </script>
 

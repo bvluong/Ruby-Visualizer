@@ -1,13 +1,10 @@
-<template>
+<template lang="html">
   <div id='editor'>
     <editor v-model="code" @init="editorInit();" lang="ruby" theme="chrome" width="500" height="100"></editor>
   </div>
 </template>
 
-
-
 <script>
-
 import Editor from 'vue2-ace-editor';
 
 export default {
@@ -27,7 +24,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="css">
 p {
   font-size: 2em;
   text-align: center;
