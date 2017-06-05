@@ -16,7 +16,7 @@
   export default {
     computed: {
       stack () {
-        return this.$store.state.code[]
+        return this.$store.state.code
       }
     },
   }

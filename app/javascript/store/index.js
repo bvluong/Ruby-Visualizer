@@ -5,21 +5,20 @@ import axios from 'axios';
 Vue.use(Vuex);
 
 const state = {
-  code: 'state code',
+  code: {},
   count: 0
 };
 
 const mutations = {
   submitCode (state, { data }) {
-    console.log(data.data);
-    state.code = data + 'abcd';
+    state.code = data;
   }
 };
 
 const actions = {
   submitCode: ({ commit }, code) => {
     return axios.post('/api/inputs', {
-      input: code }).then( response => commit('submitCode', {data: response}) );
+      input: code }).then( response => commit('submitCode', response) );
   }
 };
 
