@@ -1,24 +1,20 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <Header></Header>
     <CodeInput></CodeInput>
   </div>
 </template>
 
 <script>
 import CodeInput from '../components/code_input'
+import Header from '../components/header'
 
 export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
-    }
-  },
-  components: { CodeInput }
+  components: { CodeInput, Header }
 }
 </script>
 
-<style scoped>
+<style>
 p {
   font-size: 2em;
   text-align: center;
