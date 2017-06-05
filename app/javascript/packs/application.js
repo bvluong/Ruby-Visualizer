@@ -10,14 +10,9 @@ import Vue from 'vue';
 import App from './app';
 import store from '../store';
 
-
-console.log(store);
-console.log('Hello World from Webpacker')
-
-
 document.addEventListener('DOMContentLoaded', () => {
-  const node = document.getElementById('hello-vue')
-  const data = JSON.parse(node.getAttribute('data'))
+  const node = document.getElementById('hello-vue');
+  const data = JSON.parse(node.getAttribute('data'));
 
   const app = new Vue({
     data: data,
@@ -25,7 +20,5 @@ document.addEventListener('DOMContentLoaded', () => {
     el: '#hello-vue',
     template: '<App/>',
     components: { App }
-  })
-
-  console.log(app)
-})
+  });
+});
