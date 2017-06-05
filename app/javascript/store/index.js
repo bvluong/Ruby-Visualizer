@@ -1,5 +1,6 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
@@ -10,6 +11,7 @@ const state = {
 
 const mutations = {
   submitCode (state, { data }) {
+    console.log(data.data);
     state.code = data + 'abcd';
   },
   increment (state) {
@@ -19,8 +21,8 @@ const mutations = {
 
 const actions = {
   submitCode: ({ commit }, code) => {
-    axios.post('')
-    return commit('submitCode', {data: code});
+    return axios.post('/api/inputs', {
+      input: code }).then( response => commit('submitCode', {data: response}) );
   },
   increment: ({ commit }) => commit('increment')
 };

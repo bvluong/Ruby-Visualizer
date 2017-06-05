@@ -42,6 +42,8 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     arel (8.0.0)
     bindex (0.5.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.3)
     byebug (9.0.6)
     capybara (2.14.0)
@@ -61,6 +63,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    debug_inspector (0.0.3)
     erubi (1.6.0)
     execjs (2.7.0)
     ffi (1.9.18)
@@ -70,6 +73,7 @@ GEM
     jbuilder (2.6.4)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2)
+    json (1.8.6)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -173,10 +177,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  binding_of_caller
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
+  json
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.7)
   rails (~> 5.1.1)

@@ -11,7 +11,6 @@
 <script>
 import Editor from 'vue2-ace-editor';
 import { mapActions } from 'vuex';
-console.log(mapActions);
 export default {
   computed: {
     code () {
@@ -20,7 +19,12 @@ export default {
   },
   data: function () {
     return {
-      userInput: "sadas"
+      userInput: `def calc(x,y)
+          x += 1
+          y += 1
+          return x+y
+      end
+      calc(1,1)`
     }
   },
   components: { Editor },
