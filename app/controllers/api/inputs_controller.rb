@@ -51,9 +51,8 @@ class Eval
       object["lineno"] = lineno
 
       until binding.of_caller(count).eval('__method__').to_s == "evaluate"
-
         variableInfo = {}
-
+        variableInfo['depth'] = count
         binding.of_caller(count).eval('local_variables').each do |var|
           variableInfo[var] = binding.of_caller(count+1).eval(var.to_s)
         end
