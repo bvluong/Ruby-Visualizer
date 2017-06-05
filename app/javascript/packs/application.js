@@ -8,9 +8,10 @@
 // layout file, like app/views/layouts/application.html.erb
 import Vue from 'vue';
 import App from './app';
+import store from '../store';
 
 
-
+console.log(store);
 console.log('Hello World from Webpacker')
 
 
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const app = new Vue({
     data: data,
+    store,
     el: '#hello-vue',
     template: '<App/>',
     components: { App }
