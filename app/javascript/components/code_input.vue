@@ -38,10 +38,3 @@ export default {
   }
 }
 </script>
-
-<style lang="css">
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>
