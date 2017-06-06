@@ -26,17 +26,23 @@
       </li>
     </ul>
     <span>{{forwardStack}}</span>
+
+    <DisplayCode :frame="currentFrame"></DisplayCode>
   </div>
 </template>
 
 <script>
 import Editor from 'vue2-ace-editor';
 import { mapActions } from 'vuex';
+import DisplayCode from './display_code';
 export default {
   computed: {
     forwardStack () {
      return this.$store.state.code
-   }
+   },
+    currentFrame () {
+      return this.forwardStack[0]
+    }
   },
   data: function () {
     return {
@@ -49,7 +55,7 @@ export default {
       backwardStack: []
     }
   },
-  components: { Editor },
+  components: { Editor, DisplayCode },
   methods: {
     moveForward: function () {
       this.backwardStack.push(this.forwardStack.shift())
