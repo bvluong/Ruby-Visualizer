@@ -1,11 +1,11 @@
 <template>
   <div id='display'>
-    <h1>Current Frame: {{frame}}</h1>
-    <ul>
+    <!-- <h2>Current Frame: {{stackFrame}}</h2> -->
+    <ul class='function-list'>
       <li v-for="stack in stackFrame">
         <h2>Method: {{frameName(stack)}}</h2>
         <h3>Variables:</h3>
-        <ul>
+        <ul class='var-list'>
           <li v-for='varPair in getVariables(stack)'>
             {{varPair}}
           </li>
@@ -33,10 +33,18 @@
         let vars = Object.keys(stack)
         vars.shift()
         let vals = []
-        vars.forEach((v) => vals.push(`${v}: ${stack[v]}`))
+        vars.forEach((v) => {
+          stack[v] ? vals.push(`${v}: ${stack[v]}`) : null
+        })
         return vals
       },
     },
     props: ['frame']
   }
 </script>
+
+<style module>
+  .red{
+    color: red;
+  }
+</style>

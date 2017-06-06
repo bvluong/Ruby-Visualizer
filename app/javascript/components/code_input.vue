@@ -1,34 +1,39 @@
 <template lang="html">
-  <div id='editor' class='code-input'>
-    <editor class="editor" v-model="userInput" @init="editorInit();"
-    lang="ruby" theme="github"  height="400" width="45%"></editor>
+  <div id='body-section'>
+    <div id='editor' class='code-input'>
+      <editor class="editor" v-model="userInput" @init="editorInit();"
+      lang="ruby" theme="github"  height="400" width="100%"></editor>
 
-    <section class="input-buttons">
-      <button type="button" name="button"
+      <section class="input-buttons">
+        <button type="button" name="button"
         @click="moveBackward">Backward
-      </button>
-      <button type="button" name="button"
+        </button>
+        <button type="button" name="button"
         @click="submitCode(userInput)">Run Code
-      </button>
-      <button type="button" name="button"
+        </button>
+        <button type="button" name="button"
         @click="moveForward">Forward
-      </button>
-    </section>
+        </button>
+      </section>
 
-    <!-- <ul>
+      <!-- <ul>
       <li v-for="stack in forwardStack">
-        {{ stack }}
+      {{ stack }}
       </li>
-    </ul>
-    <ul>
+      </ul>
+      <ul>
       <li v-for="bstack in backwardStack">
-          {{ bstack }}
+      {{ bstack }}
       </li>
-    </ul> -->
-    <!-- <span>{{forwardStack}}</span> -->
+      </ul>
+      <span>{{forwardStack}}</span> -->
 
-    <DisplayCode :frame="currentFrame"></DisplayCode>
+    </div>
+    <div id='display-code'>
+      <DisplayCode :frame="currentFrame"></DisplayCode>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -47,12 +52,16 @@ export default {
   },
   data: function () {
     return {
-      userInput: `def calc(x,y)
-          x += 1
-          y += 1
+      userInput:
+       `def test(arr)
+          h = {two: 2}
+          x = 1
+          y = 1
+          arr.map {|x| x*2}
+          x += 2
           return x+y
-      end
-      calc(1,1)`,
+        end
+        test([1,1,3,4])`,
       backwardStack: []
     }
   },
