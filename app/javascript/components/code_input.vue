@@ -1,6 +1,6 @@
 <template lang="html">
   <div id='editor' class='code-input'>
-    <editor class="editor" v-model="userInput" @init="editorInit();" lang="ruby" theme="kuroir" width="600" height="300"></editor>
+    <editor class="editor" v-model="userInput" @init="editorInit();" lang="ruby" theme="kuroir" width="45%" height="400"></editor>
 
     <section class="input-buttons">
       <button type="button" name="button"
