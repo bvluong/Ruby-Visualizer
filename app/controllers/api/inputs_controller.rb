@@ -7,7 +7,6 @@ class Api::InputsController < ApplicationController
   def create
     littleEval = Eval.new(params[:input])
     littleEval.trace
-    p littleEval.stack_history
     render json: littleEval.stack_history.stack_store
   end
 
@@ -79,15 +78,15 @@ class Eval
       stack_frame = MyStack.new
       swap = false
       until grabMethodName(count) == "evaluate"
-        # if blocks
-        #   blockObj = {}
-        #   swap ? blockObj['method_name'] = grabMethodName(count) : blockObj['method_name'] = 'block'
-        #   swap = true
-        #   binding.of_caller(count).eval('local_variables').each do |var2|
-        #     blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s)
-        #   end
-        #   stack_frame.push(blockObj)
-        # else
+        if blocks
+          blockObj = {}
+          swap ? blockObj['method_name'] = grabMethodName(count) : blockObj['method_name'] = 'block'
+          swap = true
+          binding.of_caller(count).eval('local_variables').each do |var2|
+            blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s)
+          end
+          stack_frame.push(blockObj)
+        else
           functionObj = {}
           functionObj['method_name'] = grabMethodName(count)
           binding.of_caller(count).eval('local_variables').each do |var|
@@ -98,10 +97,9 @@ class Eval
             end
           end
           stack_frame.push(functionObj)
-        # end
+        end
         count += 1
       end
-
       @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
     end
   end
