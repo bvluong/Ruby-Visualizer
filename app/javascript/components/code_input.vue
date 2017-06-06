@@ -1,8 +1,9 @@
 <template lang="html">
-  <div id='editor' class='code-input'>
-    <editor class="editor" v-model="userInput" @init="editorInit();"
-    lang="ruby" theme="github"  height="400" width="45%"></editor>
-
+  <div class='code-input'>
+    <div ref="editor">
+      <Editor v-model="userInput" id='editor'
+      lang="ruby" theme="github"  height="400" width="45%"></Editor>
+    </div>
     <section class="input-buttons">
       <button type="button" name="button"
         @click="moveBackward">Backward
@@ -14,25 +15,15 @@
         @click="moveForward">Forward
       </button>
     </section>
-
-    <!-- <ul>
-      <li v-for="stack in forwardStack">
-        {{ stack }}
-      </li>
-    </ul>
-    <ul>
-      <li v-for="bstack in backwardStack">
-          {{ bstack }}
-      </li>
-    </ul> -->
-    <!-- <span>{{forwardStack}}</span> -->
-
     <DisplayCode :frame="currentFrame"></DisplayCode>
   </div>
 </template>
 
 <script>
 import Editor from 'vue2-ace-editor';
+import 'brace/mode/ruby';
+import 'brace/mode/less';
+import 'brace/theme/github';
 import { mapActions } from 'vuex';
 import DisplayCode from './display_code';
 export default {
@@ -60,14 +51,17 @@ export default {
   methods: {
     moveForward: function () {
       this.backwardStack.push(this.forwardStack.shift())
+      this.highlightLine()
     },
     moveBackward: function () {
       this.forwardStack.unshift(this.backwardStack.pop())
+      this.highlightLine()
     },
-    editorInit: function () {
-        require('brace/mode/ruby');
-        require('brace/mode/less');
-        require('brace/theme/github');
+    highlightLine: function () {
+      var editor = ace.edit('editor')
+      var Range = ace.acequire('ace/range').Range
+      const lineno = parseInt(Object.keys(this.currentFrame)[0].slice(6))
+      editor.session.addMarker( new Range(lineno, 0, lineno, 1), "ace_active-line", "fullLine");
     },
     ...mapActions(['submitCode'])
   }
