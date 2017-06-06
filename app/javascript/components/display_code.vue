@@ -1,55 +1,58 @@
 <template>
   <div id='display'>
-    <p>
-      {{code}}
-    </p>
-
-    <h1>Current Frame</h1>
-    <h2>Method: {{frameName}}</h2>
-    <h3>Variables:</h3>
+    <h1>Current Frame: {{frame}}</h1>
     <ul>
       {{stackFrame}}
+      <li v-for="stack in stackFrame">
+        <h2>Method: {{frameName(stack)}}</h2>
+        <h3>Variables:</h3>
+        <ul>
+          <li v-for='varPair in variables'>
+            {{varPair}}
+          </li>
+        </ul>
+      </li>
+
     </ul>
   </div>
 </template>
 
 <script>
   export default {
+    data: function () {
+      return {
+        variables: [],
+      }
+    },
     computed: {
-      code () {
+      lineNo: function () {
         if (this.frame) {
-          return this.frame
-        } else {
-          return {}
+          return Object.keys(this.frame)[0]
         }
-      },
-      lineNo () {
-        return Object.keys(this.code)[0]
       },
       stackFrame () {
         if (this.frame) {
-          return this.code[this.lineNo][0]
+          return this.frame[this.lineNo]
         }
       },
-      frameName () {
+    },
+
+    methods: {
+      frameName: function (stack) {
         if (this.stackFrame) {
-          return this.stackFrame['method_name']
+          this.getVariables(stack)
+          return stack['method_name']
         }
       },
-      // variables () {
-      //   if (this.code.length > 0) {
-      //     let vars = Object.keys(this.stackFrame)
-      //     vars.shift()
-      //     let vals = []
-      //     vars.forEach((v) => vals.push(this.stackFrame[v]))
-      //     return vals
-      //   }
-      // },
-      // varItems () {
-      //   if (this.code.length > 0) {
-      //
-      //   }
-      // }
+      getVariables: function (stack) {
+        if (this.frame) {
+          let vars = Object.keys(stack)
+          vars.shift()
+          let vals = []
+          vars.forEach((v) => vals.push(`${v}: ${stack[v]}`))
+          this.variables = vals
+        }
+      },
     },
     props: ['frame']
   }
