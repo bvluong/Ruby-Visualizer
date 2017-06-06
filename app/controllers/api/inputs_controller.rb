@@ -37,6 +37,7 @@ class Eval
     block_lines = getBlockLineNumbers
     tracer = TracePoint.new(:line) do |tp|
       counter += 1
+
       if block_lines.any? { |x,y| tp.lineno.between?(x,y)}
         retrieve_variables(tp.lineno, true)
       else

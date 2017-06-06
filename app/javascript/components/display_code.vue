@@ -1,24 +1,60 @@
 <template>
   <div id='display'>
-    <p>
-      {{stack}}
-    </p>
-    <svg width="500" height="500">
-    <g><text x='0' y='20'>Frame information</text></g>
-      <circle cx="50" cy="50" r="5" stroke="green" stroke-width="4" fill="yellow" />
-      <canvas></canvas>
-    <g><text x='250' y='20'>Detail</text></text></g>
-    </svg>
+    <h1>Current Frame: {{frame}}</h1>
+    <ul>
+      {{stackFrame}}
+      <li v-for="stack in stackFrame">
+        <h2>Method: {{frameName(stack)}}</h2>
+        <h3>Variables:</h3>
+        <ul>
+          <li v-for='varPair in variables'>
+            {{varPair}}
+          </li>
+        </ul>
+      </li>
+
+    </ul>
   </div>
 </template>
 
 <script>
   export default {
-    computed: {
-      stack () {
-        return this.$store.state.code
+    data: function () {
+      return {
+        variables: [],
       }
     },
+    computed: {
+      lineNo: function () {
+        if (this.frame) {
+          return Object.keys(this.frame)[0]
+        }
+      },
+      stackFrame () {
+        if (this.frame) {
+          return this.frame[this.lineNo]
+        }
+      },
+    },
+
+    methods: {
+      frameName: function (stack) {
+        if (this.stackFrame) {
+          this.getVariables(stack)
+          return stack['method_name']
+        }
+      },
+      getVariables: function (stack) {
+        if (this.frame) {
+          let vars = Object.keys(stack)
+          vars.shift()
+          let vals = []
+          vars.forEach((v) => vals.push(`${v}: ${stack[v]}`))
+          this.variables = vals
+        }
+      },
+    },
+    props: ['frame']
   }
 </script>
 
