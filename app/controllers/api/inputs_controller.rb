@@ -64,10 +64,10 @@ class Eval
         binding.of_caller(count).eval('local_variables').each do |var|
           functionObj[var] = binding.of_caller(count+1).eval(var.to_s)
         end
-        stack_frame.push(functionObj
+        stack_frame.push(functionObj)
         count += 1
       end
-      
+
       @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
     end
   end
