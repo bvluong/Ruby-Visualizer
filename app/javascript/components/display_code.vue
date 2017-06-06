@@ -5,9 +5,10 @@
     </p>
 
     <h1>Current Frame</h1>
+    <h2>Method: {{frameName}}</h2>
+    <h3>Variables:</h3>
     <ul>
-      {{stackFrame}}
-
+      {{variables}}
     </ul>
     <!-- <svg width="500" height="500">
     <g><text x='0' y='20'>Frame information</text></g>
@@ -29,9 +30,24 @@
       },
       stackFrame () {
         if (this.code.length > 0) {
-          return this.stack['lineno2']
+          return this.stack['lineno2'][0]
+        }
+      },
+      frameName () {
+        if (this.code.length > 0) {
+          return this.stackFrame['method_name']
+        }
+      },
+      variables () {
+        if (this.code.length > 0) {
+          let vars = Object.keys(this.stackFrame)
+          vars.shift()
+          let vals = []
+          vars.forEach((v) => vals.push(this.stackFrame[v]))
+          return vals
         }
       }
+
     },
   }
 </script>
