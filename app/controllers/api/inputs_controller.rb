@@ -62,7 +62,6 @@ class Eval
       unless endnumbers.include?(tp3.lineno)
         endnumbers << tp3.lineno
       end
->>>>>>> 236a5a68bd8b90193ac605be4ca638adfc7a9083
     end.enable do
       evaluate
     end
