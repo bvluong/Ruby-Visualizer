@@ -34,7 +34,18 @@
         vars.shift()
         let vals = []
         vars.forEach((v) => {
-          stack[v] ? vals.push(`${v}: ${stack[v]}`) : null
+          if (stack[v] instanceof Array ) {
+            vals.push(`${v}: [${stack[v]}]`)
+          } else if (stack[v] instanceof Object) {
+            vals.push(`${v}: ${JSON.stringify(stack[v])}`)
+          } else if (stack[v] === null){
+            null
+          } else {
+            vals.push(`${v}: ${stack[v]}`)
+          }
+
+
+
         })
         return vals
       },
