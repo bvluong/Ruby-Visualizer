@@ -14,6 +14,12 @@ header {
   nav {
     display: flex;
     flex-direction: row;
-    align-self: center;
+    vertical-align: center;
+    padding: 10px;
+    align-items: 10px;
+    h4 {
+      align-self: center;
+      padding: 0 10px;
+    }
   }
 }

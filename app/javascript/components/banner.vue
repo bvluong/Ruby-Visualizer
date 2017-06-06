@@ -2,7 +2,7 @@
   <header>
     <h3>Ruby Visualizer</h3>
     <nav>
-      <h4>Visualize your code in Ruby</h4>
+      <h4>Instructions/Tag Line</h4>
       <button type="button" name="button">See Example</button>
     </nav>
   </header>

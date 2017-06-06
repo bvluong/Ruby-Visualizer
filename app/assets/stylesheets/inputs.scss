@@ -20,12 +20,19 @@
   flex-direction: row;
   justify-content: space-around;
   width: 45%;
-  button {
-    width: 120px;
-    height: 30px;
-    border-radius: 4px;
-    background: #ccd9bf;
-    color: #8B575C;
-    font-size: 15px;
-  }
+}
+
+button {
+  width: 120px;
+  height: 30px;
+  border-radius: 4px;
+  background: #eff3f6;
+  color: black;
+  font-size: 15px;
+}
+
+.myMarker {
+  position:absolute;
+  background:rgba(100,200,100,0.5);
+  z-index:20
 }

@@ -1,6 +1,7 @@
 <template lang="html">
   <div id='editor' class='code-input'>
-    <editor class="editor" v-model="userInput" @init="editorInit();" lang="ruby" theme="kuroir" width="45%" height="400"></editor>
+    <editor class="editor" v-model="userInput" @init="editorInit();"
+    lang="ruby" theme="github"  height="400" width="45%"></editor>
 
     <section class="input-buttons">
       <button type="button" name="button"
@@ -59,7 +60,7 @@ export default {
     editorInit: function () {
         require('brace/mode/ruby');
         require('brace/mode/less');
-        require('brace/theme/kuroir');
+        require('brace/theme/github');
     },
     ...mapActions(['submitCode'])
   }
