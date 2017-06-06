@@ -1,12 +1,14 @@
 require 'binding_of_caller'
 require 'json'
+require_relative 'my_stack'
 
 class Api::InputsController < ApplicationController
 
   def create
     littleEval = Eval.new(params[:input])
     littleEval.trace
-    render json: littleEval.answer
+    p littleEval.stack_history
+    render json: littleEval.stack_history.stack_store
   end
 
 end
@@ -14,21 +16,20 @@ end
 
 class Eval
 
-  attr_reader :answer
+  attr_reader :stack_history
 
   def initialize(code)
     @code = code
     @state = {}
     @count = 0
-    @stackcount = 0
-    @answer = Hash.new
+    @stack_history = MyStack.new
   end
 
   def evaluate
     begin
       eval(@code)
     rescue
-      p @answer
+      p @stack_history
     end
   end
 
@@ -46,23 +47,28 @@ class Eval
   def retrieve_variables(lineno)
     count = 2
     unless ["trace", "evaluate"].include?(grabMethodName(count))
-      @stackcount += 1
       object = {}
-      object["lineno"] = lineno
+      stack_frame = MyStack.new
 
       until grabMethodName(count) == "evaluate"
-        variableInfo = {}
-        variableInfo['depth'] = count
-
-        binding.of_caller(count).eval('local_variables').each do |var|
-          variableInfo[var] = binding.of_caller(count+1).eval(var.to_s)
+        unless binding.of_caller(count-1).eval('local_variables').include?(:tracer)
+          blockObj = {}
+          blockObj['method_name'] = 'block'
+          binding.of_caller(count-1).eval('local_variables').each do |var2|
+            blockObj[var2] = binding.of_caller(count).eval(var2.to_s)
+          end
+          stack_frame.push(blockObj)
         end
 
-        object[grabMethodName(count)] = variableInfo
+        functionObj = {}
+        binding.of_caller(count).eval('local_variables').each do |var|
+          functionObj[var] = binding.of_caller(count+1).eval(var.to_s)
+        end
+        stack_frame.push(functionObj
         count += 1
       end
-
-      @answer["frame#{@stackcount}"] = object
+      
+      @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
     end
   end
 
