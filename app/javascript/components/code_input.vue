@@ -1,15 +1,19 @@
 <template lang="html">
-  <div id='editor' class='test'>
-    <editor v-model="userInput" @init="editorInit();" lang="ruby" theme="chrome" width="500" height="100"></editor>
-    <button type="button" name="button"
-      @click="moveBackward">Backward
-    </button>
-    <button type="button" name="button"
-      @click="submitCode(userInput)">Run Code
-    </button>
-    <button type="button" name="button"
-      @click="moveForward">Forward
-    </button>
+  <div id='editor' class='code-input'>
+    <editor class="editor" v-model="userInput" @init="editorInit();" lang="ruby" theme="kuroir" width="600" height="300"></editor>
+
+    <section class="input-buttons">
+      <button type="button" name="button"
+        @click="moveBackward">Backward
+      </button>
+      <button type="button" name="button"
+        @click="submitCode(userInput)">Run Code
+      </button>
+      <button type="button" name="button"
+        @click="moveForward">Forward
+      </button>
+    </section>
+
     <ul>
       <li v-for="stack in forwardStack">
         {{ stack }}
@@ -55,7 +59,7 @@ export default {
     editorInit: function () {
         require('brace/mode/ruby');
         require('brace/mode/less');
-        require('brace/theme/chrome');
+        require('brace/theme/kuroir');
     },
     ...mapActions(['submitCode'])
   }

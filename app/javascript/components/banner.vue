@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h3>Logo</h3>
+    <h3>Ruby Visualizer</h3>
     <nav>
       Instructions/Example
     </nav>

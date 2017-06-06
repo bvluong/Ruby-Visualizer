@@ -1,0 +1,19 @@
+header {
+  height: 60px;
+  width: 100%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  h3 {
+    font-size: 30px;
+    margin: 0;
+    align-self: center;
+  }
+  nav {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+  }
+}
