@@ -44,7 +44,8 @@ export default {
           return x+y
       end
       calc(1,1)`,
-      backwardStack: []
+      backwardStack: [],
+      lastline: false
     }
   },
   components: { Editor, DisplayCode },
@@ -61,7 +62,10 @@ export default {
       var editor = ace.edit('editor')
       var Range = ace.acequire('ace/range').Range
       const lineno = parseInt(Object.keys(this.currentFrame)[0].slice(6))
-      editor.session.addMarker( new Range(lineno, 0, lineno, 1), "ace_active-line", "fullLine");
+      if (this.lastline) {
+        editor.session.removeMarker(this.lastline, "ace_active-line", "fullLine");
+      }
+      this.lastline = editor.session.addMarker( new Range(lineno, 0, lineno, 1), "ace_active-line", "fullLine");
     },
     ...mapActions(['submitCode'])
   }
