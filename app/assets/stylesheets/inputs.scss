@@ -2,11 +2,37 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-header {
-  height: 100px;
-  width: 100%;
+.editor {
+  width: 500px;
+  height: 300px;
   border: 1px solid black;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.code-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  width: 45%;
+}
+
+button {
+  width: 120px;
+  height: 30px;
+  border-radius: 4px;
+  background: #eff3f6;
+  color: black;
+  font-size: 15px;
+}
+
+.myMarker {
+  position:absolute;
+  background:rgba(100,200,100,0.5);
+  z-index:20
 }

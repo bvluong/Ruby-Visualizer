@@ -1,10 +1,31 @@
 <template lang="html">
-  <div id='editor' class='test'>
-    <editor v-model="userInput" @init="editorInit();" lang="ruby" theme="chrome" width="500" height="100"></editor>
-    <button type="button" name="button"
-      @click="submitCode(userInput)">
-    </button>
-    <span>{{code}}</span>
+  <div id='editor' class='code-input'>
+    <editor class="editor" v-model="userInput" @init="editorInit();"
+    lang="ruby" theme="github"  height="400" width="45%"></editor>
+
+    <section class="input-buttons">
+      <button type="button" name="button"
+        @click="moveBackward">Backward
+      </button>
+      <button type="button" name="button"
+        @click="submitCode(userInput)">Run Code
+      </button>
+      <button type="button" name="button"
+        @click="moveForward">Forward
+      </button>
+    </section>
+
+    <ul>
+      <li v-for="stack in forwardStack">
+        {{ stack }}
+      </li>
+    </ul>
+    <ul>
+      <li v-for="bstack in backwardStack">
+          {{ bstack }}
+      </li>
+    </ul>
+    <span>{{forwardStack}}</span>
   </div>
 </template>
 
@@ -13,7 +34,7 @@ import Editor from 'vue2-ace-editor';
 import { mapActions } from 'vuex';
 export default {
   computed: {
-    code () {
+    forwardStack () {
      return this.$store.state.code
    }
   },
@@ -25,14 +46,21 @@ export default {
           return x+y
       end
       calc(1,1)`,
+      backwardStack: []
     }
   },
   components: { Editor },
   methods: {
+    moveForward: function () {
+      this.backwardStack.push(this.forwardStack.shift())
+    },
+    moveBackward: function () {
+      this.forwardStack.unshift(this.backwardStack.pop())
+    },
     editorInit: function () {
         require('brace/mode/ruby');
         require('brace/mode/less');
-        require('brace/theme/chrome');
+        require('brace/theme/github');
     },
     ...mapActions(['submitCode'])
   }

@@ -1,8 +1,9 @@
 <template>
   <header>
-    <h3>Logo</h3>
+    <h3>Ruby Visualizer</h3>
     <nav>
-      Instructions/Example
+      <h4>Instructions/Tag Line</h4>
+      <button type="button" name="button">See Example</button>
     </nav>
   </header>
 </template>
