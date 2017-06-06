@@ -83,7 +83,11 @@ class Eval
           swap ? blockObj['method_name'] = grabMethodName(count) : blockObj['method_name'] = 'block'
           swap = true
           binding.of_caller(count).eval('local_variables').each do |var2|
-            blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s)
+            if binding.of_caller(count+1).eval(var2.to_s).is_a?(Array)
+              blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s).dup
+            else
+              blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s)
+            end
           end
           stack_frame.push(blockObj)
         else
