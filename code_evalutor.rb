@@ -100,24 +100,19 @@ require 'byebug'
 
 
 
-# method = <<-EOF
-#   def printsomething
-#     y = 0
-#     c
-#     (20..25).step do |x|
-#       c
-#       y += x
-#     end
-#
-#     return y
-#   end
-# p printsomething
+method = <<-EOF
+def double(arr)
+  arr.map {|x| x*2}
+end
 
-# EOF
+double([1,1,3,4])
+p printsomething
 
-# RubyVM::InstructionSequence.compile_option=({:inline_const_cache=>true, :peephole_optimization=>true, :tailcall_optimization=>true, :specialized_instruction=>true, :operands_unification=>true, :instructions_unification=>true, :stack_caching=>true, :trace_instruction=>true, :frozen_string_literal=>true, :debug_frozen_string_literal=>true, :debug_level=>0})
-# puts RubyVM::InstructionSequence.new(method).to_a
-#
+EOF
+
+RubyVM::InstructionSequence.compile_option=({:inline_const_cache=>true, :peephole_optimization=>true, :tailcall_optimization=>true, :specialized_instruction=>true, :operands_unification=>true, :instructions_unification=>true, :stack_caching=>true, :trace_instruction=>true, :frozen_string_literal=>true, :debug_frozen_string_literal=>true, :debug_level=>0})
+p RubyVM::InstructionSequence.new(method).to_a
+
 # RubyVM::DebugInspector.open { |dc|
 #   # backtrace locations (returns an array of Thread::Backtrace::Location objects)
 #   locs = dc.backtrace_locations
@@ -134,22 +129,22 @@ require 'byebug'
 #     p dc.frame_class(i)
 #   end
 # }
-
-RubyProf.start
-
-def printsomething
-  y = 0
-  (20..25).step do |x|
-    y += x
-  end
-  return y
-end
-
-p printsomething
-
-
-result = RubyProf.stop
-
-p result
-printer = RubyProf::CallStackPrinter.new(result)
-printer.print(STDOUT)
+#
+# RubyProf.start
+#
+# def printsomething
+#   y = 0
+#   (20..25).step do |x|
+#     y += x
+#   end
+#   return y
+# end
+#
+# p printsomething
+#
+#
+# result = RubyProf.stop
+#
+# p result
+# printer = RubyProf::CallStackPrinter.new(result)
+# printer.print(STDOUT)
