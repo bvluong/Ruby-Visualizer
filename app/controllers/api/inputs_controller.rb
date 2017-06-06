@@ -36,7 +36,6 @@ class Eval
     counter = 0
     tracer = TracePoint.new(:line) do |tp|
       counter += 1
-      [tp.event]
       retrieve_variables(tp.lineno)
     end.enable do
       evaluate
