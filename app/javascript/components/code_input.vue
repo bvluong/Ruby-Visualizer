@@ -15,7 +15,7 @@
       </button>
     </section>
 
-    <ul>
+    <!-- <ul>
       <li v-for="stack in forwardStack">
         {{ stack }}
       </li>
@@ -24,8 +24,8 @@
       <li v-for="bstack in backwardStack">
           {{ bstack }}
       </li>
-    </ul>
-    <span>{{forwardStack}}</span>
+    </ul> -->
+    <!-- <span>{{forwardStack}}</span> -->
 
     <DisplayCode :frame="currentFrame"></DisplayCode>
   </div>
@@ -41,7 +41,8 @@ export default {
      return this.$store.state.code
    },
     currentFrame () {
-      return this.forwardStack[0]
+
+      return this.forwardStack[0] ? this.forwardStack[0] : {}
     }
   },
   data: function () {
