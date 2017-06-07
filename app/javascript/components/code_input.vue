@@ -72,7 +72,8 @@ sum_arr([1,2,3,4])`,
       backwardStack: [],
       previousLine: false,
       stackFrame: 0,
-      buttonUpdate: true
+      buttonUpdate: true,
+      firstRun: false
     }
   },
   components: { Editor, DisplayCode },
@@ -112,6 +113,7 @@ sum_arr([1,2,3,4])`,
       this.backwardStack = []
       this.submitCode(userInput)
       this.buttonUpdate = true
+      this.firstRun = true
     },
     selectLine() {
       var editor = ace.edit('editor')
@@ -120,7 +122,9 @@ sum_arr([1,2,3,4])`,
         editor.selection.clearSelection();
         editor.selection.moveCursorToPosition({row: lineno-1, column: 0})
         if (this.stackFrame != 0) {
+          if (this.firstRun) {
           this.buttonUpdate = false
+          }
         }
       }
     },
