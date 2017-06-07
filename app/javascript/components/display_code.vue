@@ -1,6 +1,6 @@
 <template>
   <div id='display'>
-    <h2>Current Frame: {{stackFrame}}</h2>
+    <h2>Current Frame: {{frame}}</h2>
     <ul class='function-list'>
       <li v-for="stack in stackFrame">
         <h2>Method: {{frameName(stack)}}</h2>
@@ -39,24 +39,32 @@
         vars.shift()
         let vals = []
         vars.forEach((v) => {
-          if (stack[v] instanceof Array ) {
-            vals.push(`(ARRAY) ${v}: [${stack[v]}]`)
-          } else if (stack[v] instanceof Object) {
+          switch (true){
+            case stack[v] instanceof Array:
+              vals.push(`(ARRAY) ${v}: [${stack[v]}]`)
+              break;
+            case stack[v] instanceof Object:
               let hashDisplay = this.getHashValues(stack[v])
               vals.push(`(HASH) ${v}: ${hashDisplay}`)
-          } else if (typeof stack[v] === 'string'){
+              break;
+            case typeof stack[v] === 'string':
               vals.push(`(STRING) ${v}: ${stack[v]}`)
-          } else if (typeof stack[v] === 'number') {
+              break;
+            case typeof stack[v] === 'number':
               vals.push(`(NUMBER)  ${v}: ${stack[v]}`)
-          } else {
+              break;
+            default:
               null
-          }
-        })
+            }
+          })
+
         return vals
       },
       getHashValues: function (hash) {
-        return JSON.stringify(hash)
-
+        let keys = Object.keys(hash)
+        let hashVals = []
+        keys.forEach(key => hashVals.push(`${key}: ${hash[key]}`))
+        return hashVals
       }
     },
     props: ['frame']
