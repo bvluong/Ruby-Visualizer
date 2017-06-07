@@ -4,7 +4,7 @@
     <div class='code-input'>
       <div ref='editor'>
         <Editor  id='editor' v-model="userInput"
-        lang="ruby" theme="github"  height="400" width="100%"></Editor>
+        lang="ruby" theme="github"  height="400" width="500px"></Editor>
       </div>
 
       <section class="input-buttons">
@@ -23,7 +23,7 @@
     <div id='display-code'>
       <DisplayCode :frame="currentFrame"></DisplayCode>
     </div>
-
+  </div>
 </template>
 
 <script>
@@ -44,7 +44,6 @@ export default {
   },
   data: function () {
     return {
-<<<<<<< HEAD
       userInput:
       `def test(arr)
                 h = {two: 2}
@@ -55,17 +54,8 @@ export default {
                 return x+y
               end
               test([1,1,3,4])`,
-      backwardStack: []
-=======
-      userInput: `def calc(x,y)
-          x += 1
-          y += 1
-          return x+y
-      end
-      calc(1,1)`,
       backwardStack: [],
       previousLine: false
->>>>>>> 690e5ccc9a4f7cb2cca33a6303c9f067540c34a8
     }
   },
   components: { Editor, DisplayCode },
