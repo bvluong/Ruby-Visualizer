@@ -6,7 +6,7 @@ class Api::InputsController < ApplicationController
 
   def create
     littleEval = Eval.new(params[:input])
-    littleEval.trace
+    littleEval.check_infinite
     render json: littleEval.stack_history.stack_store
   end
 end
@@ -23,17 +23,37 @@ class Eval
     @stack_history = MyStack.new
     @errors = []
     @return = nil
+    @error_counter = 0
+    @stack_history_counter = 0
   end
 
   def evaluate
-    p 'abcd'
     begin
       @return = eval(@code)
     rescue => e
-      p "e error"
       @errors << e
     rescue SyntaxError => e
       @errors << e
+    rescue SystemStackError => e
+      @errors << e
+    rescue IndexError => e
+      @errors << e
+    end
+  end
+
+  def check_infinite
+    tracer = TracePoint.new(:line) do |tp|
+      @error_counter += 1
+      if @error_counter > 9999
+        break
+      end
+    end.enable do
+      evaluate
+    end
+    if @error_counter > 9999
+      @stack_history.push({errors: "Your code exceeded 9999 stacks, you are probably in an infinite loop or stack overflow"})
+    else
+      trace
     end
   end
 
@@ -42,10 +62,16 @@ class Eval
     block_lines = getBlockLineNumbers
     tracer = TracePoint.new(:line) do |tp|
       counter += 1
-      if block_lines.any? { |x,y| tp.lineno.between?(x,y)}
-        retrieve_variables(tp.lineno, true)
+      @stack_history_counter += 1
+      if @stack_history_counter < 3000
+        if block_lines.any? { |x,y| tp.lineno.between?(x,y)}
+          retrieve_variables(tp.lineno, true)
+        else
+          retrieve_variables(tp.lineno)
+        end
       else
-        retrieve_variables(tp.lineno)
+        @stack_history.push({ errors: "stack frames exceeded" })
+        break
       end
     end.enable do
       evaluate
@@ -57,14 +83,6 @@ class Eval
     end
   end
 
-  def getReturnValue
-    tracer = TracePoint.new(:return) do |tp|
-      p tp.return_value
-    end.enable do
-      evaluate
-    end
-  end
-
   def retrieve_variables(lineno, blocks = false)
     count = 2
     unless ["trace", "evaluate", "step", "ensure_iteration_allowed"].include?(grabMethodName(count))
@@ -72,6 +90,7 @@ class Eval
       stack_frame = MyStack.new
       swap = false
       until grabMethodName(count) == "evaluate"
+        @stack_history_counter += 1
         count += 1 if grabMethodName(count) == "step"
         if blocks
           blockObj = {}
@@ -108,7 +127,7 @@ class Eval
         count += 1
       end
       @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
-      p @stack_history
+      return @stack_history
     end
   end
 
