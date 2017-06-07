@@ -87,7 +87,11 @@ class Eval
             if binding.of_caller(count+1).eval(var2.to_s).is_a?(Array)
               blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s).dup
             else
-              blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s)
+              curr_var2 = binding.of_caller(count+1).eval(var2.to_s)
+              if curr_var2.is_a?(Symbol)
+                curr_var2 = curr_var2.to_s + 'SYM'
+              end
+              blockObj[var2] = curr_var2
             end
           end
           stack_frame.push(blockObj)
@@ -98,7 +102,11 @@ class Eval
             if binding.of_caller(count+1).eval(var.to_s).is_a?(Array)
               functionObj[var] = binding.of_caller(count+1).eval(var.to_s).dup
             else
-              functionObj[var] = binding.of_caller(count+1).eval(var.to_s)
+              curr_var = binding.of_caller(count+1).eval(var.to_s)
+              if curr_var.is_a?(Symbol)
+                curr_var = curr_var.to_s + 'SYM'
+              end
+              functionObj[var] = curr_var
             end
           end
           stack_frame.push(functionObj)
@@ -106,6 +114,7 @@ class Eval
         count += 1
       end
       @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
+      p @stack_history
     end
   end
 

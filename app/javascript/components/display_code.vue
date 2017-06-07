@@ -48,7 +48,12 @@
               vals.push(`(HASH) ${v}: ${hashDisplay}`)
               break;
             case typeof stack[v] === 'string':
-              vals.push(`(STRING) ${v}: ${stack[v]}`)
+            console.log(stack[v][0]);
+              if (stack[v].slice(stack[v].length-3) === 'SYM') {
+                vals.push(`(SYMBOL) ${v}: :${stack[v].slice(0, stack[v].length-3)}`)
+              } else {
+                vals.push(`(STRING) ${v}: ${stack[v]}`)
+              }
               break;
             case typeof stack[v] === 'number':
               if (stack[v] % 1 === 0) {
@@ -69,8 +74,8 @@
       getHashValues: function (hash) {
         let keys = Object.keys(hash)
         let hashVals = []
-        keys.forEach(key => hashVals.push(`${key}: ${hash[key]}`))
-        return hashVals
+        keys.forEach(key => hashVals.push(` ${key}: ${hash[key]}`))
+        return `{${hashVals}}`
       }
     },
     props: ['frame']
