@@ -74,11 +74,12 @@ class Eval
 
   def retrieve_variables(lineno, blocks = false)
     count = 2
-    unless ["trace", "evaluate"].include?(grabMethodName(count))
+    unless ["trace", "evaluate", "step", "ensure_iteration_allowed"].include?(grabMethodName(count))
       object = {}
       stack_frame = MyStack.new
       swap = false
       until grabMethodName(count) == "evaluate"
+        count += 1 if grabMethodName(count) == "step"
         if blocks
           blockObj = {}
           swap ? blockObj['method_name'] = grabMethodName(count) : blockObj['method_name'] = 'block'

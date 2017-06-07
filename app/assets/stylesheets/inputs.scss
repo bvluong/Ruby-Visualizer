@@ -2,17 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#body-section{
+.body-section{
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
+button {
+  width: 100px;
+  height: 25px;
+  border-radius: 4px;
+  background: #eff3f6;
+  color: black;
+  font-size: 15px;
+}
+
+
 .editor {
-  width: 80%;
-  height: 600px;
   border: 1px solid black;
   margin: 10px 0;
   border-radius: 5px;
+  max-width: 600px;
 }
 
 .code-input {
@@ -20,26 +30,31 @@
   flex-direction: column;
   align-items: center;
   width: 50%;
+  max-width: 590px;
 }
 
 .input-buttons {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin: 10px 0;
   width: 100%;
+  button {
+    width: 80px;
+    height: 20px;
+    font-size: 12px;
+    padding: 0px;
+    align-items: center;
+  }
 }
 
-button {
-  width: 120px;
-  height: 30px;
-  border-radius: 4px;
-  background: #eff3f6;
-  color: black;
-  font-size: 15px;
-}
 
 .myMarker {
   position:absolute;
   background:rgba(100,200,100,0.5);
   z-index:20
+}
+
+.frame-count {
+  align-self: center;
 }
