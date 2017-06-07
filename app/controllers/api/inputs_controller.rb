@@ -51,7 +51,9 @@ class Eval
       evaluate
     end
     if @error_counter > 9999
-      @stack_history.push({errors: "Your code exceeded 9999 stacks, you are probably in an infinite loop or stack overflow"})
+      p @error_counter
+      @stack_history.push({errors: "Error: Your code exceeded 9999 stacks, you are probably in an infinite loop or stack overflow"})
+      p @stack_history
     else
       trace
     end
@@ -70,16 +72,16 @@ class Eval
           retrieve_variables(tp.lineno)
         end
       else
-        @stack_history.push({ errors: "stack frames exceeded" })
+        @stack_history.push({ errors: "Error: stack frames exceeded" })
         break
       end
     end.enable do
       evaluate
     end
     if @errors.length > 0
-      @stack_history.push({ errors: @errors[0] })
+      @stack_history.push({ errors: "Error: #{@errors[0]}"})
     elsif @return
-      @stack_history.push({ return_value: @return })
+      @stack_history.push({ return_value: "Return Value: #{@return}" })
     end
   end
 
@@ -126,7 +128,7 @@ class Eval
         end
         count += 1
       end
-      @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
+      @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store.reverse } )
       return @stack_history
     end
   end

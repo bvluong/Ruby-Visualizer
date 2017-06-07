@@ -11,7 +11,6 @@ const state = {
 
 const mutations = {
   submitCode (state, { data }) {
-    console.log(data);
     state.code = data;
   }
 };
