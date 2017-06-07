@@ -1,6 +1,8 @@
 <template>
   <div id='display'>
-    <h2>Current Line: {{lineNo.slice(lineNo.length-1)}}</h2>
+    <h2>Error: {{errors}}</h2>
+    <h2>Return Value: {{returnValue}}</h2>
+    <!-- <h2>Current Line: {{lineNo.slice(lineNo.length-1)}}</h2> -->
     <ul class='function-list'>
       <li v-for="stack in stackFrame">
         <h2>{{frameName(stack)}}</h2>
@@ -23,12 +25,26 @@
 <script>
   export default {
     computed: {
+      errors: function () {
+        if (Object.keys(this.frame).includes('errors')) {
+          return this.frame['errors']
+        }
+      },
+      returnValue: function () {
+        if (Object.keys(this.frame).includes('return_value')){
+          return this.frame['return_value']
+        }
+      },
       lineNo: function () {
-        return Object.keys(this.frame)[0]
+        if (Object.keys(this.frame)[0] === 'errors') {
+          return null
+        } else {
+          return Object.keys(this.frame)[0]
+        }
       },
       stackFrame () {
-        if (this.frame[this.lineNo]) {
-          return this.frame[this.lineNo].reverse()
+        if (this.lineNo){
+          return this.frame[this.lineNo]
         } else {
           return []
         }

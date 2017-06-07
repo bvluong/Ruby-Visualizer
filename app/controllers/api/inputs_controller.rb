@@ -51,7 +51,9 @@ class Eval
       evaluate
     end
     if @error_counter > 9999
+      p @error_counter
       @stack_history.push({errors: "Your code exceeded 9999 stacks, you are probably in an infinite loop or stack overflow"})
+      p @stack_history
     else
       trace
     end
@@ -126,7 +128,7 @@ class Eval
         end
         count += 1
       end
-      @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
+      @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store.reverse } )
       return @stack_history
     end
   end
