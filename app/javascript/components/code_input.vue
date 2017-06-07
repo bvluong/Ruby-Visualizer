@@ -9,7 +9,7 @@
         @click="moveBackward">Backward
       </button>
       <button type="button" name="button"
-        @click="submitCode(userInput)">Run Code
+        @click="runCode(userInput)">Run Code
       </button>
       <button type="button" name="button"
         @click="moveForward">Forward
@@ -32,7 +32,6 @@ export default {
      return this.$store.state.code
    },
     currentFrame () {
-
       return this.forwardStack[0] ? this.forwardStack[0] : {}
     }
   },
@@ -45,27 +44,42 @@ export default {
       end
       calc(1,1)`,
       backwardStack: [],
-      lastline: false
+      previousLine: false
     }
   },
   components: { Editor, DisplayCode },
+  updated: function () {
+    this.handleHighlight()
+  },
   methods: {
     moveForward: function () {
-      this.backwardStack.push(this.forwardStack.shift())
-      this.highlightLine()
+      if (this.forwardStack.length > 1) {
+        this.backwardStack.push(this.forwardStack.shift())
+      }
     },
     moveBackward: function () {
-      this.forwardStack.unshift(this.backwardStack.pop())
-      this.highlightLine()
+      if (this.backwardStack.length > 0) {
+        this.forwardStack.unshift(this.backwardStack.pop())
+      }
     },
-    highlightLine: function () {
+    runCode: function(userInput) {
+      this.submitCode(userInput)
+    },
+    handleHighlight() {
       var editor = ace.edit('editor')
       var Range = ace.acequire('ace/range').Range
       const lineno = parseInt(Object.keys(this.currentFrame)[0].slice(6))
-      if (this.lastline) {
-        editor.session.removeMarker(this.lastline, "ace_active-line", "fullLine");
+      if (this.previousLine) {
+        this.unhighlightLine(editor)
       }
-      this.lastline = editor.session.addMarker( new Range(lineno, 0, lineno, 1), "ace_active-line", "fullLine");
+      editor.session.removeMarker(1, "ace_active-line", "fullLine");
+      this.highlightLine(editor, Range, lineno)
+    },
+    unhighlightLine: function (editor) {
+      editor.session.removeMarker(this.previousLine, "ace_active-line", "fullLine");
+    },
+    highlightLine: function (editor, Range, lineno) {
+      this.previousLine = editor.session.addMarker( new Range(lineno-1, 0, lineno-1, 1), "ace_active-line", "fullLine");
     },
     ...mapActions(['submitCode'])
   }
