@@ -57,6 +57,8 @@
                 vals.push(`(FLOAT)  ${v}: ${stack[v]}`)
               }
               break;
+            case typeof stack[v] === 'boolean':
+              vals.push(`(BOOLEAN)  ${v}: ${stack[v]}`)
             default:
               null
             }
