@@ -6,10 +6,9 @@ class Api::InputsController < ApplicationController
 
   def create
     littleEval = Eval.new(params[:input])
-    littleEval.trace
+    littleEval.check_infinite
     render json: littleEval.stack_history.stack_store
   end
-
 end
 
 
@@ -22,13 +21,39 @@ class Eval
     @state = {}
     @count = 0
     @stack_history = MyStack.new
+    @errors = []
+    @return = nil
+    @error_counter = 0
+    @stack_history_counter = 0
   end
 
   def evaluate
     begin
-      eval(@code)
-    rescue
-      p @stack_history
+      @return = eval(@code)
+    rescue => e
+      @errors << e
+    rescue SyntaxError => e
+      @errors << e
+    rescue SystemStackError => e
+      @errors << e
+    rescue IndexError => e
+      @errors << e
+    end
+  end
+
+  def check_infinite
+    tracer = TracePoint.new(:line) do |tp|
+      @error_counter += 1
+      if @error_counter > 9999
+        break
+      end
+    end.enable do
+      evaluate
+    end
+    if @error_counter > 9999
+      @stack_history.push({errors: "Your code exceeded 9999 stacks, you are probably in an infinite loop or stack overflow"})
+    else
+      trace
     end
   end
 
@@ -37,40 +62,26 @@ class Eval
     block_lines = getBlockLineNumbers
     tracer = TracePoint.new(:line) do |tp|
       counter += 1
-
-      if block_lines.any? { |x,y| tp.lineno.between?(x,y)}
-        retrieve_variables(tp.lineno, true)
+      @stack_history_counter += 1
+      if @stack_history_counter < 3000
+        if block_lines.any? { |x,y| tp.lineno.between?(x,y)}
+          retrieve_variables(tp.lineno, true)
+        else
+          retrieve_variables(tp.lineno)
+        end
       else
-        retrieve_variables(tp.lineno)
+        @stack_history.push({ errors: "stack frames exceeded" })
+        break
       end
     end.enable do
       evaluate
+    end
+    if @errors.length > 0
+      @stack_history.push({ errors: @errors[0] })
+    elsif @return
+      @stack_history.push({ return_value: @return })
     end
   end
-
-  def getBlockLineNumbers
-    startnumbers = []
-    endnumbers = []
-    trace2 = TracePoint.trace(:b_call) do |tp2|
-      unless startnumbers.include?(tp2.lineno)
-        startnumbers << tp2.lineno
-      end
-    end.enable do
-      evaluate
-    end
-    trace3 = TracePoint.trace(:b_return) do |tp3|
-      unless endnumbers.include?(tp3.lineno)
-        endnumbers << tp3.lineno
-      end
-    end.enable do
-      evaluate
-    end
-    startnumbers.pop
-    startnumbers.shift
-    endnumbers.pop
-    return [startnumbers,endnumbers].transpose
-  end
-
 
   def retrieve_variables(lineno, blocks = false)
     count = 2
@@ -79,6 +90,7 @@ class Eval
       stack_frame = MyStack.new
       swap = false
       until grabMethodName(count) == "evaluate"
+        @stack_history_counter += 1
         count += 1 if grabMethodName(count) == "step"
         if blocks
           blockObj = {}
@@ -115,12 +127,35 @@ class Eval
         count += 1
       end
       @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
-      p @stack_history
+      return @stack_history
     end
   end
 
   def grabMethodName(count)
     binding.of_caller(count+1).eval('__method__').to_s
+  end
+
+  def getBlockLineNumbers
+    startnumbers = []
+    endnumbers = []
+    trace2 = TracePoint.trace(:b_call) do |tp2|
+      unless startnumbers.include?(tp2.lineno)
+        startnumbers << tp2.lineno
+      end
+    end.enable do
+      evaluate
+    end
+    trace3 = TracePoint.trace(:b_return) do |tp3|
+      unless endnumbers.include?(tp3.lineno)
+        endnumbers << tp3.lineno
+      end
+    end.enable do
+      evaluate
+    end
+    startnumbers.pop
+    startnumbers.shift
+    endnumbers.pop
+    return [startnumbers,endnumbers].transpose
   end
 
 end
