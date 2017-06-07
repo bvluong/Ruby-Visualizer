@@ -8,29 +8,6 @@
   width: 100%;
 }
 
-.editor {
-  width: 80%;
-  height: 600px;
-  border: 1px solid black;
-  margin: 10px 0;
-  border-radius: 5px;
-}
-
-.code-input {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
-}
-
-.input-buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 10px 0;
-  width: 100%;
-}
-
 button {
   width: 120px;
   height: 30px;
@@ -39,6 +16,38 @@ button {
   color: black;
   font-size: 15px;
 }
+
+
+.editor {
+  border: 1px solid black;
+  margin: 10px 0;
+  border-radius: 5px;
+  max-width: 600px;
+}
+
+.code-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  max-width: 590px;
+}
+
+.input-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px 0;
+  width: 100%;
+  button {
+    width: 80px;
+    height: 20px;
+    font-size: 12px;
+    padding: 0px;
+    align-items: center;
+  }
+}
+
 
 .myMarker {
   position:absolute;

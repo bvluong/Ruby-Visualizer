@@ -3,17 +3,23 @@
   <div class='body-section'>
     <div class='code-input'>
         <Editor  id='editor' v-model="userInput"
-        lang="ruby" theme="github"  height="400" width="100%"></Editor>
+        lang="ruby" theme="solarized_light"  height="400" width="100%"></Editor>
 
       <section class="input-buttons">
         <button type="button" name="button"
-        @click="moveBackward">Backward
+        @click="moveFirst"><< First
+        </button>
+        <button type="button" name="button"
+        @click="moveBackward">< Back
         </button>
         <div class="frame-count">
           Step {{stackFrame}} of {{ codeLength }}
         </div>
         <button type="button" name="button"
-        @click="moveForward">Forward
+        @click="moveForward">Forward >
+        </button>
+        <button type="button" name="button"
+        @click="moveLast">Last >>
         </button>
       </section>
 
@@ -32,7 +38,7 @@
 import Editor from 'vue2-ace-editor';
 import 'brace/mode/ruby';
 import 'brace/mode/less';
-import 'brace/theme/github';
+import 'brace/theme/solarized_light';
 import { mapActions } from 'vuex';
 import DisplayCode from './display_code';
 export default {
@@ -78,6 +84,16 @@ export default {
     }
   },
   methods: {
+    moveFirst: function () {
+      while (this.backwardStack.length >= 1) {
+        this.moveBackward()
+      }
+    },
+    moveLast: function () {
+      while (this.forwardStack.length > 1) {
+        this.moveForward()
+      }
+    },
     moveForward: function () {
       if (this.forwardStack.length > 1) {
         this.backwardStack.push(this.forwardStack.shift())
