@@ -1,7 +1,7 @@
 <template>
   <div id='display'>
-    <h2>Error: {{errors}}</h2>
-    <h2>Return Value: {{returnValue}}</h2>
+    <h2>{{errors}}</h2>
+    <h2>{{returnValue}}</h2>
     <!-- <h2>Current Line: {{lineNo.slice(lineNo.length-1)}}</h2> -->
     <ul class='function-list'>
       <li v-for="stack in stackFrame">
