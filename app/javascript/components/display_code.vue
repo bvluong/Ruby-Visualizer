@@ -1,13 +1,18 @@
 <template>
   <div id='display'>
-    <h2>Current Frame: {{frame}}</h2>
+    <h2>Current Line: {{lineNo.slice(lineNo.length-1)}}</h2>
     <ul class='function-list'>
       <li v-for="stack in stackFrame">
-        <h2>Method: {{frameName(stack)}}</h2>
+        <h2>{{frameName(stack)}}</h2>
         <h3>Variables:</h3>
+
         <ul class='var-list'>
-          <li v-for='varPair in getVariables(stack)'>
-            {{varPair}}
+          <li v-for='col in getVariables(stack)'>
+            <ul>
+              <li v-for='item in col'>
+                {{item}}
+              </li>
+            </ul>
           </li>
         </ul>
       </li>
@@ -23,7 +28,7 @@
       },
       stackFrame () {
         if (this.frame[this.lineNo]) {
-          return this.frame[this.lineNo]
+          return this.frame[this.lineNo].reverse()
         } else {
           return []
         }
@@ -37,39 +42,62 @@
       getVariables: function (stack) {
         let vars = Object.keys(stack)
         vars.shift()
-        let vals = []
+        // let cols = []
+        let vals = ['VALUE']
+        let types = ['TYPE']
+        let currVars = ['NAME']
         vars.forEach((v) => {
           switch (true){
             case stack[v] instanceof Array:
-              vals.push(`(ARRAY) ${v}: [${stack[v]}]`)
+              vals.push(`[${stack[v]}]`)
+              types.push('array')
+              currVars.push(v)
+              // cols.push(`[${v}], [${stack[v]}], ['ARRAY']`)
               break;
             case stack[v] instanceof Object:
               let hashDisplay = this.getHashValues(stack[v])
-              vals.push(`(HASH) ${v}: ${hashDisplay}`)
+              vals.push(`${hashDisplay}`)
+              types.push('hash')
+              currVars.push(v)
+              // cols.push(`[${v}], [${stack[v]}], ['HASH']`)
               break;
             case typeof stack[v] === 'string':
-            console.log(stack[v][0]);
               if (stack[v].slice(stack[v].length-3) === 'SYM') {
-                vals.push(`(SYMBOL) ${v}: :${stack[v].slice(0, stack[v].length-3)}`)
+                vals.push(`:${stack[v].slice(0, stack[v].length-3)}`)
+                types.push('symbol')
+                currVars.push(v)
+                // cols.push(`[${v}], [${stack[v]}], ['SYMBOL']`)
               } else {
-                vals.push(`(STRING) ${v}: ${stack[v]}`)
+                vals.push(`${stack[v]}`)
+                types.push('string')
+                currVars.push(v)
+                // cols.push(`[${v}], [${stack[v]}], ['STRING']`)
               }
               break;
             case typeof stack[v] === 'number':
               if (stack[v] % 1 === 0) {
-                vals.push(`(INTEGER)  ${v}: ${stack[v]}`)
+                vals.push(`${stack[v]}`)
+                types.push('integer')
+                currVars.push(v)
+                // cols.push(`[${v}], [${stack[v]}], ['INTEGER']`)
               } else {
-                vals.push(`(FLOAT)  ${v}: ${stack[v]}`)
+                vals.push(`${stack[v]}`)
+                types.push('float')
+                currVars.push(v)
+                // cols.push(`[${v}], [${stack[v]}], ['FLOAT']`)
               }
               break;
             case typeof stack[v] === 'boolean':
-              vals.push(`(BOOLEAN)  ${v}: ${stack[v]}`)
+              vals.push(`${stack[v]}`)
+              types.push('boolean')
+              currVars.push(v)
+              // cols.push(`[${v}], [${stack[v]}], ['BOOLEAN']`)
             default:
               null
             }
           })
 
-        return vals
+        return [currVars, vals, types]
       },
       getHashValues: function (hash) {
         let keys = Object.keys(hash)

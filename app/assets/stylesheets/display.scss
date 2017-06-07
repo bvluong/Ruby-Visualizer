@@ -2,6 +2,11 @@
   width: 50%;
   display: flex;
   flex-direction: column;
+  padding: 10px;
+}
+
+h1, h2, h3{
+  margin: 0;
 }
 
 #display-code li {
@@ -10,8 +15,10 @@
 
 .function-list > li{
   border: 1px solid  black;
+  padding: 3px;
+  margin: 5px;
 }
 
 .var-list{
-
+  display: flex;
 }

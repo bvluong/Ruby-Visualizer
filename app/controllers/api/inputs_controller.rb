@@ -27,8 +27,11 @@ class Eval
   def evaluate
     begin
       eval(@code)
-    rescue
-      p @stack_history
+      # p caller.size
+    rescue => error
+      # p "SOMETHING BAD HAPPENED"
+      # p error
+      # p @stack_history
     end
   end
 
