@@ -53,15 +53,15 @@ export default {
   data: function () {
     return {
       userInput:
-       `def test(arr)
-          h = {two: 2}
-          x = 1
-          y = 1
-          arr.map {|x| x*2}
-          x += 2
-          return x+y
-        end
-        test([1,1,3,4])`,
+      `def test(arr)
+                h = {two: 2}
+                x = 'test'
+                y = 1.3
+                arr.map {|x| x*2}
+                z = 2
+                return x+y
+              end
+              test([1,1,3,4])`,
       backwardStack: []
     }
   },
