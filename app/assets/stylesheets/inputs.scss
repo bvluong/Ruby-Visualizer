@@ -2,9 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#body-section{
+  display: flex;
+  justify-content: space-between;
+}
+
 .editor {
-  width: 500px;
-  height: 300px;
+  width: 80%;
+  height: 600px;
   border: 1px solid black;
   margin: 10px 0;
   border-radius: 5px;
@@ -13,13 +18,15 @@
 .code-input {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 50%;
 }
 
 .input-buttons {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 45%;
+  width: 100%;
 }
 
 button {

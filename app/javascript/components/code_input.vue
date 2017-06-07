@@ -1,21 +1,28 @@
 <template lang="html">
-  <div class='code-input'>
-    <div ref="editor">
-      <Editor v-model="userInput" id='editor'
-      lang="ruby" theme="github"  height="400" width="45%"></Editor>
-    </div>
-    <section class="input-buttons">
-      <button type="button" name="button"
+
+  <div id='body-section'>
+    <div class='code-input'>
+      <div ref='editor'>
+        <Editor  id='editor' v-model="userInput"
+        lang="ruby" theme="github"  height="400" width="500px"></Editor>
+      </div>
+
+      <section class="input-buttons">
+        <button type="button" name="button"
         @click="moveBackward">Backward
-      </button>
-      <button type="button" name="button"
-        @click="runCode(userInput)">Run Code
-      </button>
-      <button type="button" name="button"
+        </button>
+        <button type="button" name="button"
+        @click="submitCode(userInput)">Run Code
+        </button>
+        <button type="button" name="button"
         @click="moveForward">Forward
-      </button>
-    </section>
-    <DisplayCode :frame="currentFrame"></DisplayCode>
+        </button>
+      </section>
+
+    </div>
+    <div id='display-code'>
+      <DisplayCode :frame="currentFrame"></DisplayCode>
+    </div>
   </div>
 </template>
 
@@ -37,12 +44,16 @@ export default {
   },
   data: function () {
     return {
-      userInput: `def calc(x,y)
-          x += 1
-          y += 1
-          return x+y
-      end
-      calc(1,1)`,
+      userInput:
+      `def test(arr)
+                h = {two: 2}
+                x = 'test'
+                y = 1.3
+                arr.map {|x| x*2}
+                z = 2
+                return x+y
+              end
+              test([1,1,3,4])`,
       backwardStack: [],
       previousLine: false
     }
