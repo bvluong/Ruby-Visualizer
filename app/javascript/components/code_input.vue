@@ -60,17 +60,15 @@ export default {
   data: function () {
     return {
       userInput:
-      `def test(arr)
-                h = {two: 2}
-                x = 'test'
-                y = 1.3
-                (0..5).step do |idx|
-                  y += idx
-                end
-                z = 2
-                return x+y
-              end
-              test([1,1,3,4])`,
+      `def sum_arr(arr)
+    if  arr.length < 1
+        return 0
+    else
+        return arr[-1] + sum_arr(arr[0..-2])
+    end
+end
+
+sum_arr([1,2,3,4])`,
       backwardStack: [],
       previousLine: false,
       stackFrame: 0,
@@ -121,7 +119,7 @@ export default {
         const lineno = parseInt(Object.keys(this.currentFrame)[0].slice(6))
         editor.selection.clearSelection();
         editor.selection.moveCursorToPosition({row: lineno-1, column: 0})
-        if (this.stackFrame != 1) {
+        if (this.stackFrame != 0) {
           this.buttonUpdate = false
         }
       }
