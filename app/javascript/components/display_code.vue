@@ -51,7 +51,11 @@
               vals.push(`(STRING) ${v}: ${stack[v]}`)
               break;
             case typeof stack[v] === 'number':
-              vals.push(`(NUMBER)  ${v}: ${stack[v]}`)
+              if (stack[v] % 1 === 0) {
+                vals.push(`(INTEGER)  ${v}: ${stack[v]}`)
+              } else {
+                vals.push(`(FLOAT)  ${v}: ${stack[v]}`)
+              }
               break;
             default:
               null
