@@ -60,7 +60,7 @@ export default {
   },
   components: { Editor, DisplayCode },
   updated: function () {
-    this.handleHighlight()
+    this.selectLine()
   },
   methods: {
     moveForward: function () {
@@ -76,21 +76,10 @@ export default {
     runCode: function(userInput) {
       this.submitCode(userInput)
     },
-    handleHighlight() {
+    selectLine() {
       var editor = ace.edit('editor')
-      var Range = ace.acequire('ace/range').Range
       const lineno = parseInt(Object.keys(this.currentFrame)[0].slice(6))
-      if (this.previousLine) {
-        this.unhighlightLine(editor)
-      }
-      editor.session.removeMarker(1, "ace_active-line", "fullLine");
-      this.highlightLine(editor, Range, lineno)
-    },
-    unhighlightLine: function (editor) {
-      editor.session.removeMarker(this.previousLine, "ace_active-line", "fullLine");
-    },
-    highlightLine: function (editor, Range, lineno) {
-      this.previousLine = editor.session.addMarker( new Range(lineno-1, 0, lineno-1, 1), "ace_active-line", "fullLine");
+      editor.selection.moveCursorToPosition({row: lineno-1, column: 0})
     },
     ...mapActions(['submitCode'])
   }
