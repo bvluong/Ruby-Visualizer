@@ -3,7 +3,7 @@
   <div class='body-section'>
     <div class='code-input'>
         <Editor  id='editor' v-model="userInput"
-        lang="ruby" theme="solarized_light"  height="400" width="100%"></Editor>
+        lang="ruby" theme="xcode"  height="400" width="100%"></Editor>
 
       <section class="input-buttons">
         <button type="button" name="button"
@@ -38,7 +38,7 @@
 import Editor from 'vue2-ace-editor';
 import 'brace/mode/ruby';
 import 'brace/mode/less';
-import 'brace/theme/solarized_light';
+import 'brace/theme/xcode';
 import { mapActions } from 'vuex';
 import DisplayCode from './display_code';
 export default {
@@ -67,17 +67,12 @@ export default {
     b = true
     h = {two: 2}
     if  arr.length < 1
-        return 0
-    else
-        return arr[-1] + sum_arr(arr[0..-2])
-    end
-end
-
-sum_arr([1,2,3,4])`,
+        return 0`,
       backwardStack: [],
       previousLine: false,
       stackFrame: 0,
-      buttonUpdate: true
+      buttonUpdate: true,
+      firstRun: false
     }
   },
   components: { Editor, DisplayCode },
@@ -117,6 +112,7 @@ sum_arr([1,2,3,4])`,
       this.backwardStack = []
       this.submitCode(userInput)
       this.buttonUpdate = true
+      this.firstRun = true
     },
     selectLine() {
       var editor = ace.edit('editor')
@@ -125,7 +121,9 @@ sum_arr([1,2,3,4])`,
         editor.selection.clearSelection();
         editor.selection.moveCursorToPosition({row: lineno-1, column: 0})
         if (this.stackFrame != 0) {
+          if (this.firstRun) {
           this.buttonUpdate = false
+          }
         }
       }
     },
