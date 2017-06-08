@@ -1,18 +1,54 @@
+.frame-box{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d8d8d8;
+  ul{
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: center;
+    padding: 2px;
+    background-color: #d8d8d8;
+  }
+}
+
 .variable, .variable-box {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;;
   align-items: center;
 }
 
-.variable > li {
-  width: 85%;
-  text-align: center;
+.pink {
+  color: #c900a6;
+}
+
+.blue {
+  color: #3a00dc;
 }
 
 .variable-type{
   background-color: #e8e8e8;
+  flex: 2;
+  text-align: center;
 }
 
 ul {
   padding: 0;
+}
+
+.variable-name{
+  font-weight: bold;
+  padding-left: 10px;
+  flex: 2;
+  text-align: left;
+}
+
+.variable-arrow{
+  flex: 2;
+  text-align: left;
+}
+
+.variable-val{
+  flex: 6;
+  text-align: left;
 }

@@ -14,12 +14,11 @@ h1, h2, h3{
   list-style: none;
 }
 
-.function-list > li{
-  border: 1px solid #d8d8d8;
-  padding: 3px;
-  // margin: 5px;
+.function-list{
+  display: flex;
+  flex-direction: column;
 }
 
-.var-list{
-  display: flex;
-}
+// .var-list{
+//   display: flex;
+// }

@@ -1,9 +1,9 @@
 <template>
   <div class='variable'>
     <li class='variable-type'>array</li>
-    <li>{{arrName}}</li>
-    <li>----></li>
-    <li>{{arrVal}}</li>
+    <li class='variable-name'>{{arrName}}</li>
+    <li class='variable-arrow pink'>----></li>
+    <li class='variable-val blue'>{{arrVal}}</li>
   </div>
 </template>
 
