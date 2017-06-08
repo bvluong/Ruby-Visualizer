@@ -2,11 +2,6 @@
   <ul>
     {{getVariables}}
     <h2>{{name}}</h2>
-    <ul class='variable'>
-      <h4>Name</h4>
-      <h4>Value</h4>
-      <h4>Type</h4>
-    </ul>
     <li v-for='arr in arrays'>
       <ArrayType :array='arr'></ArrayType>
     </li>

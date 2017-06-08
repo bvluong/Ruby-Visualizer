@@ -33,17 +33,7 @@ import Frame from './frame'
         }
       },
       stackFrame () {
-        if (this.lineNo){
-          let withoutExtras = this.frame[this.lineNo].slice()
-          // withoutExtras.forEach(stackObj => {
-          //   delete stackObj['method_name']
-          // })
-          return withoutExtras
-
-        } else {
-          return []
-        }
-
+        return this.lineNo ? this.frame[this.lineNo] : []
       },
     },
     props: ['frame']

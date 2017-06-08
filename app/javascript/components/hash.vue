@@ -1,8 +1,9 @@
 <template>
   <div class='variable'>
+    <li class='variable-type'>[hash]</li>
     <li>{{hashName}}</li>
+    <li>----></li>
     <li>{{hashVal}}</li>
-    <li>hash</li>
   </div>
 </template>
 
