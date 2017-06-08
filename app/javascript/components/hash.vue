@@ -1,10 +1,10 @@
 <template>
   <div class='variable'>
     <li class='variable-type'>hash</li>
-    <li>{{hashName}}</li>
-    <li>----></li>
-    <li>{{hashVal}}</li>
-  </div>
+      <li class='variable-name'>{{hashName}}</li>
+      <li class='variable-arrow pink'>----></li>
+      <li class='variable-val blue'>{{hashVal}}</li>
+</div>
 </template>
 
 <script>

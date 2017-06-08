@@ -1,17 +1,20 @@
 <template>
-  <ul>
-    {{getVariables}}
-    <h2>{{name}}</h2>
-    <li v-for='arr in arrays'>
-      <ArrayType :array='arr'></ArrayType>
-    </li>
-    <li v-for='hash in hashes'>
-      <HashType :hash='hash'></HashType>
-    </li>
-    <li v-for='other in otherTypes'>
-      <OtherType :other='other'></OtherType>
-    </li>
-  </ul>
+    <ul class='frame-box' v-bind:style="{ width: boxWidth + '%', border: '2px solid ' + borderColor}">
+      {{getVariables}}
+      <ul>
+        <h2>{{name}}</h2>
+        <h4>{{'stack no.: ' + stackNum}}</h4>
+      </ul>
+      <li v-for='arr in arrays'>
+        <ArrayType :array='arr'></ArrayType>
+      </li>
+      <li v-for='hash in hashes'>
+        <HashType :hash='hash'></HashType>
+      </li>
+      <li v-for='other in otherTypes'>
+        <OtherType :other='other'></OtherType>
+      </li>
+    </ul>
 </template>
 
 <script>
@@ -25,10 +28,16 @@ export default {
       arrays: [],
       hashes: [],
       otherTypes: [],
-      name: ''
+      name: '',
+      boxWidth: 60,
+      borderColor: '#d8d8d8'
     }
   },
-  props: ['stacks'],
+  created: function () {
+    this.getWidth
+    this.changeBorder
+  },
+  props: ['stacks', 'stackNum', 'isCurrentFrame'],
   computed: {
     getVariables: function () {
       let vars = Object.keys(this.stacks)
@@ -57,6 +66,12 @@ export default {
       this.arrays = localArrays
       this.hashes = localHashes
       this.otherTypes = localOtherTypes
+    },
+    getWidth: function () {
+      this.boxWidth += (this.stackNum+1)*2
+    },
+    changeBorder: function  () {
+      this.borderColor = this.isCurrentFrame ? '#34dc00' : '#d8d8d8'
     }
   }
 }
