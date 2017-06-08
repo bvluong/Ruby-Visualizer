@@ -2,7 +2,7 @@
   <div id='display'>
     <h2>{{errors}}</h2>
     <h2>{{returnValue}}</h2>
-    <ul class='function-list'  >
+    <ul class='function-list'>
       <li v-for="stack in stackFrame">
         <Frame :stacks='stack' ></Frame>
       </li>
@@ -33,11 +33,11 @@ import Frame from './frame'
         }
       },
       stackFrame () {
-        if (this.lineNo){
-          let withoutExtras = Object.assign({}, this.frame[this.lineNo])
-          delete withoutExtras['errors']
-          delete withoutExtras['method_name']
-          console.log(withoutExtras);
+        if (this.lineNo !== 'return_value'){
+          let withoutExtras = this.frame[this.lineNo].slice()
+          withoutExtras.forEach(stackObj => {
+            delete stackObj['method_name']
+          })
           return withoutExtras
 
         } else {

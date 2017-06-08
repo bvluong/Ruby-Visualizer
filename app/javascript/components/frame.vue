@@ -1,6 +1,11 @@
 <template>
   <ul>
     {{getVariables}}
+    <ul class='variable'>
+      <h3>Name</h3>
+      <h3>Value</h3>
+      <h3>Type</h3>
+    </ul>
     <li v-for='arr in arrays'>
       <ArrayType :array='arr'></ArrayType>
     </li>

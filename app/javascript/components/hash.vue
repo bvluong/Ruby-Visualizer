@@ -2,7 +2,7 @@
   <div class='variable'>
     <h3>{{hashName}}</h3>
     <h4>{{hashVal}}</h4>
-    <h4>Hash</h4>
+    <h4>hash</h4>
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   <div class='variable'>
     <h3>{{arrName}}</h3>
     <h4>{{arrVal}}</h4>
-    <h4>Array</h4>
+    <h4>array</h4>
   </div>
 </template>
 
