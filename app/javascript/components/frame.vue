@@ -49,8 +49,6 @@ export default {
             localOtherTypes.push({[v]: this.stacks[v]})
           }
       })
-      console.log(nullVals);
-      console.log(localOtherTypes);
       this.arrays = localArrays
       this.hashes = localHashes
       this.otherTypes = localOtherTypes

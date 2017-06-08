@@ -34,7 +34,12 @@ import Frame from './frame'
       },
       stackFrame () {
         if (this.lineNo){
-          return this.frame[this.lineNo]
+          let withoutExtras = Object.assign({}, this.frame[this.lineNo])
+          delete withoutExtras['errors']
+          delete withoutExtras['method_name']
+          console.log(withoutExtras);
+          return withoutExtras
+
         } else {
           return []
         }
