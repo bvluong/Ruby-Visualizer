@@ -67,7 +67,10 @@ export default {
     b = true
     h = {two: 2}
     if  arr.length < 1
-        return 0`,
+        return 0
+        end
+        end
+    sum_arr([1,2,3,4])`,
       backwardStack: [],
       previousLine: false,
       stackFrame: 0,
