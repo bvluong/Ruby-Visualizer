@@ -1,8 +1,8 @@
 <template>
   <div class='variable'>
-    <h3>{{arrName}}</h3>
-    <h4>{{arrVal}}</h4>
-    <h4>array</h4>
+    <li>{{arrName}}</li>
+    <li>{{arrVal}}</li>
+    <li>array</li>
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
   <div class='variable'>
-    <h3>{{otherName}}</h3>
-    <h4>{{getType === 'symbol' ? otherVal.slice(0, this.otherVal.length-3) : otherVal}}</h4>
-    <h4>{{getType}}</h4>
+    <li>{{otherName}}</li>
+    <li>{{getType === 'symbol' ? otherVal.slice(0, this.otherVal.length-3) : otherVal}}</li>
+    <li>{{getType}}</li>
   </div>
 </template>
 

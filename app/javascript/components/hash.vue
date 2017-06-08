@@ -1,8 +1,8 @@
 <template>
   <div class='variable'>
-    <h3>{{hashName}}</h3>
-    <h4>{{hashVal}}</h4>
-    <h4>hash</h4>
+    <li>{{hashName}}</li>
+    <li>{{hashVal}}</li>
+    <li>hash</li>
   </div>
 </template>
 

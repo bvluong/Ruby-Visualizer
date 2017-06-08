@@ -61,8 +61,10 @@ export default {
     return {
       userInput:
       `def sum_arr(arr)
+      return 0 if arr.length == 0
     x = 1
     y = 'string'
+    sum_arr(arr[1..-1])
     s= :sym
     b = true
     h = {two: 2}

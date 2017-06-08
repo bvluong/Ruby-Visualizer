@@ -1,10 +1,11 @@
 <template>
   <ul>
     {{getVariables}}
+    <h2>{{name}}</h2>
     <ul class='variable'>
-      <h3>Name</h3>
-      <h3>Value</h3>
-      <h3>Type</h3>
+      <h4>Name</h4>
+      <h4>Value</h4>
+      <h4>Type</h4>
     </ul>
     <li v-for='arr in arrays'>
       <ArrayType :array='arr'></ArrayType>
@@ -28,7 +29,8 @@ export default {
     return {
       arrays: [],
       hashes: [],
-      otherTypes: []
+      otherTypes: [],
+      name: ''
     }
   },
   props: ['stacks'],
@@ -41,6 +43,9 @@ export default {
       let nullVals = []
       vars.forEach((v) => {
         switch (true){
+          case v === 'method_name':
+            this.name = this.stacks[v]
+            break;
           case this.stacks[v] instanceof Array:
             localArrays.push({[v]: this.stacks[v]})
             break;
