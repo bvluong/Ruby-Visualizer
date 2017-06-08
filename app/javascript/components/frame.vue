@@ -1,6 +1,7 @@
 <template>
   <ul>
     {{getVariables}}
+    <h2>{{name}}</h2>
     <li v-for='arr in arrays'>
       <ArrayType :array='arr'></ArrayType>
     </li>
@@ -13,20 +14,18 @@
   </ul>
 </template>
 
-
-
-
 <script>
 import OtherType from './other'
 import ArrayType from './array'
 import HashType from './hash'
 export default {
-  components: { OtherType, ArrayType, HashType},
+  components: { OtherType, ArrayType, HashType },
   data: function () {
     return {
       arrays: [],
       hashes: [],
-      otherTypes: []
+      otherTypes: [],
+      name: ''
     }
   },
   props: ['stacks'],
@@ -36,21 +35,28 @@ export default {
       let localArrays = []
       let localHashes = []
       let localOtherTypes = []
+      let nullVals = []
       vars.forEach((v) => {
         switch (true){
+          case v === 'method_name':
+            this.name = this.stacks[v]
+            break;
           case this.stacks[v] instanceof Array:
             localArrays.push({[v]: this.stacks[v]})
             break;
           case this.stacks[v] instanceof Object:
             localHashes.push({[v]: this.stacks[v]})
             break;
+          case this.stacks[v] === null:
+            nullVals.push({[v]: this.stacks[v]})
+            break;
           default:
             localOtherTypes.push({[v]: this.stacks[v]})
           }
-        })
-        this.arrays = localArrays
-        this.hashes = localHashes
-        this.otherTypes = localOtherTypes
+      })
+      this.arrays = localArrays
+      this.hashes = localHashes
+      this.otherTypes = localOtherTypes
     }
   }
 }

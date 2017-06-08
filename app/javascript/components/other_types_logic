@@ -12,11 +12,9 @@ case typeof this.stack[v] === 'number':
     vals.push(`${this.stack[v]}`)
     types.push('float')
     currVars.push(v)
-    // cols.push(`[${v}], [${this.stack[v]}], ['FLOAT']`)
   }
   break;
 case typeof this.stack[v] === 'boolean':
   vals.push(`${this.stack[v]}`)
   types.push('boolean')
   currVars.push(v)
-  // cols.push(`[${v}], [${this.stack[v]}], ['BOOLEAN']`)
