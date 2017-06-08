@@ -128,7 +128,7 @@ class Eval
         end
         count += 1
       end
-      @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store.reverse } )
+      @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
       return @stack_history
     end
   end

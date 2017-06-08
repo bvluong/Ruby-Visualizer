@@ -63,11 +63,11 @@ export default {
       `def sum_arr(arr)
       return 0 if arr.length == 0
     x = 1
+    h = {two: 2}
     y = 'bye'
     sum_arr(arr[1..-1])
     s= :hello
     b = true
-    h = {two: 2}
     if  arr.length < 1
         return 0
         end
