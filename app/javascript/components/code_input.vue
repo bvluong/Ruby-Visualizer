@@ -61,6 +61,11 @@ export default {
     return {
       userInput:
       `def sum_arr(arr)
+    x = 1
+    y = 'string'
+    s= :sym
+    b = true
+    h = {two: 2}
     if  arr.length < 1
         return 0
     else
