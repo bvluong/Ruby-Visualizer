@@ -31,7 +31,6 @@ class Eval
     begin
     $SAFE = 1
     eval(@code)
-    $SAFE = 0
     rescue => e
       @errors << e
     rescue SyntaxError => e

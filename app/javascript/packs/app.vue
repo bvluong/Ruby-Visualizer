@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Banner></Banner>
-    <CodeInput></CodeInput>
-    <Foot></Foot>
+    <CodeInput v-on:updateCode="updateUserInput" :sampleCode="sampleCode"></CodeInput>
+    <Foot v-on:updateCode="updateUserInput"></Foot>
   </div>
 </template>
 
@@ -12,6 +12,20 @@ import Banner from '../components/banner'
 import Foot from '../components/foot'
 
 export default {
-  components: { CodeInput, Banner, Foot }
+  components: { CodeInput, Banner, Foot },
+  data: function () {
+    return {
+      sampleCode: `def food(e)
+    e += 1
+    return e
+end
+food(1)`
+    }
+  },
+  methods: {
+    updateUserInput: function(userInput) {
+      this.sampleCode = userInput
+    }
+  }
 }
 </script>
