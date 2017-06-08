@@ -1,6 +1,6 @@
 <template>
   <div class='variable'>
-    <li class='variable-type'>[hash]</li>
+    <li class='variable-type'>hash</li>
     <li>{{hashName}}</li>
     <li>----></li>
     <li>{{hashVal}}</li>
@@ -15,7 +15,12 @@ export default {
       return Object.keys(this.hash)[0]
     },
     hashVal: function () {
-      return this.hash[this.hashName]
+      let plainObj = (this.hash[this.hashName])
+      let newStrings = []
+      Object.keys(plainObj).forEach(key => {
+        newStrings.push(`${key} => ${plainObj[key]}`)
+      })
+      return `{${newStrings.join(',')}}`
     }
   }
 }

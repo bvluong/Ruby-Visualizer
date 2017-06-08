@@ -3,7 +3,7 @@
     <li class='variable-type'>{{getType}}</li>
     <li>{{otherName}}</li>
     <li>----></li>
-    <li>{{getType === 'symbol' ? `:${otherVal.slice(0, this.otherVal.length-3)}` : `${otherVal}`}}</li>
+    <li>{{otherVal}}</li>
   </div>
 </template>
 
@@ -15,6 +15,16 @@ export default {
       return Object.keys(this.other)[0]
     },
     otherVal: function () {
+      switch (true) {
+        case this.getType === 'string':
+          return `'${this.other[this.otherName]}'`
+          break
+        case this.getType === 'symbol':
+          return `:${this.other[this.otherName].slice(0, this.other[this.otherName].length-3)}`
+          break
+        default:
+          return this.other[this.otherName]
+      }
       return this.other[this.otherName]
     },
     getType: function () {
