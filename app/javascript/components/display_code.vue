@@ -3,7 +3,7 @@
     <h2>{{errors}}</h2>
     <h2>{{returnValue}}</h2>
     <ul class='function-list' v-for="(stack, idx) in stackFrame">
-        <Frame :stacks='stack' :stackNum='stackFrame.length - idx' :isCurrentFrame='idx === 0'></Frame>
+        <Frame :stacks='stack' :numWidth= 'idx' :stackNum='stackFrame.length - idx' :isCurrentFrame='idx === 0'></Frame>
     </ul>
   </div>
 </template>
