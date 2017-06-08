@@ -3,7 +3,7 @@
   <div class='body-section'>
     <div class='code-input'>
         <Editor  id='editor' v-model="userInput"
-        lang="ruby" theme="solarized_light"  height="400" width="100%"></Editor>
+        lang="ruby" theme="xcode"  height="400" width="100%"></Editor>
 
       <section class="input-buttons">
         <button type="button" name="button"
@@ -38,7 +38,7 @@
 import Editor from 'vue2-ace-editor';
 import 'brace/mode/ruby';
 import 'brace/mode/less';
-import 'brace/theme/solarized_light';
+import 'brace/theme/xcode';
 import { mapActions } from 'vuex';
 import DisplayCode from './display_code';
 export default {
@@ -60,15 +60,27 @@ export default {
   data: function () {
     return {
       userInput:
-      `def sum_arr(arr)
-    if  arr.length < 1
-        return 0
-    else
-        return arr[-1] + sum_arr(arr[0..-2])
-    end
+      `def mergesort(list)
+  return list if list.size <= 1
+  mid   = list.size / 2
+  left  = list[0, mid]
+  right = list[mid, list.size]
+  merge(mergesort(left), mergesort(right))
 end
 
-sum_arr([1,2,3,4])`,
+def merge(left, right)
+  sorted = []
+  until left.empty? || right.empty?
+    if left.first <= right.first
+      sorted << left.shift
+    else
+      sorted << right.shift
+    end
+  end
+  sorted.concat(left).concat(right)
+end
+
+mergesort([1,7,5,6])`,
       backwardStack: [],
       previousLine: false,
       stackFrame: 0,
