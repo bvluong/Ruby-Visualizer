@@ -1,0 +1,18 @@
+.variable, .variable-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.variable > li {
+  width: 85%;
+  text-align: center;
+}
+
+.variable-type{
+  background-color: #e8e8e8;
+}
+
+ul {
+  padding: 0;
+}

@@ -61,13 +61,18 @@ export default {
     return {
       userInput:
       `def sum_arr(arr)
+      return 0 if arr.length == 0
     x = 1
-    y = 'string'
-    s= :sym
+    y = 'bye'
+    sum_arr(arr[1..-1])
+    s= :hello
     b = true
     h = {two: 2}
     if  arr.length < 1
-        return 0`,
+        return 0
+        end
+        end
+    sum_arr([1,2,3,4])`,
       backwardStack: [],
       previousLine: false,
       stackFrame: 0,
