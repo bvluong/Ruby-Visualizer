@@ -1,18 +1,14 @@
 <template>
   <ul>
-    <li>
-      {{getVariables}}
-    </li>
+    {{getVariables}}
     <li v-for='arr in arrays'>
-      {{arr}}
+      <ArrayType :array='arr'></ArrayType>
     </li>
     <li v-for='hash in hashes'>
-
-      {{hash}}
+      <HashType :hash='hash'></HashType>
     </li>
     <li v-for='other in otherTypes'>
-
-      {{other}}
+      <OtherType :other='other'></OtherType>
     </li>
   </ul>
 </template>
@@ -21,13 +17,16 @@
 
 
 <script>
+import OtherType from './other'
+import ArrayType from './array'
+import HashType from './hash'
 export default {
+  components: { OtherType, ArrayType, HashType},
   data: function () {
     return {
       arrays: [],
       hashes: [],
-      otherTypes: [],
-      stacksData: this.stacks ? this.stacks : 'no stacks'
+      otherTypes: []
     }
   },
   props: ['stacks'],
