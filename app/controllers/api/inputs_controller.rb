@@ -29,7 +29,9 @@ class Eval
 
   def evaluate
     begin
-      @return = eval(@code)
+    $SAFE = 1
+    eval(@code)
+    $SAFE = 0
     rescue => e
       @errors << e
     rescue SyntaxError => e
@@ -37,6 +39,8 @@ class Eval
     rescue SystemStackError => e
       @errors << e
     rescue IndexError => e
+      @errors << e
+    rescue SecurityError => e
       @errors << e
     end
   end
