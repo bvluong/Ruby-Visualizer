@@ -29,7 +29,8 @@ class Eval
 
   def evaluate
     begin
-      @return = eval(@code)
+    $SAFE = 1
+    eval(@code)
     rescue => e
       @errors << e
     rescue SyntaxError => e
@@ -37,6 +38,8 @@ class Eval
     rescue SystemStackError => e
       @errors << e
     rescue IndexError => e
+      @errors << e
+    rescue SecurityError => e
       @errors << e
     end
   end
@@ -99,10 +102,10 @@ class Eval
           swap ? blockObj['method_name'] = grabMethodName(count) : blockObj['method_name'] = 'block'
           swap = true
           binding.of_caller(count).eval('local_variables').each do |var2|
-            if binding.of_caller(count+1).eval(var2.to_s).is_a?(Array)
-              blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s).dup
+            curr_var2 = binding.of_caller(count+1).eval(var2.to_s)
+            if curr_var2.is_a?(Array) || curr_var2.is_a?(Hash) || curr_var2.is_a?(String)
+              blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s).deep_dup
             else
-              curr_var2 = binding.of_caller(count+1).eval(var2.to_s)
               if curr_var2.is_a?(Symbol)
                 curr_var2 = curr_var2.to_s + 'SYM'
               end
@@ -111,13 +114,12 @@ class Eval
           end
           stack_frame.push(blockObj)
         else
-          functionObj = {}
-          functionObj['method_name'] = grabMethodName(count)
+          functionObj = {'method_name' => grabMethodName(count) }
           binding.of_caller(count).eval('local_variables').each do |var|
-            if binding.of_caller(count+1).eval(var.to_s).is_a?(Array)
-              functionObj[var] = binding.of_caller(count+1).eval(var.to_s).dup
+            curr_var = binding.of_caller(count+1).eval(var.to_s)
+            if curr_var.is_a?(Array) || curr_var.is_a?(Hash) || curr_var.is_a?(String)
+              functionObj[var] = curr_var.deep_dup
             else
-              curr_var = binding.of_caller(count+1).eval(var.to_s)
               if curr_var.is_a?(Symbol)
                 curr_var = curr_var.to_s + 'SYM'
               end

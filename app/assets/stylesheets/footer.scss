@@ -1,4 +1,25 @@
 .footer {
   border-top: 1px solid #d8d8d8;
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.examples {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h4 {
+    padding: 0px;
+    margin: 5px 0px;
+  }
+  button {
+    margin: 5px 0px;
+    height: 20px;
+    font-size: 14px;
+    width: 120px;
+    padding: 0px;
+    align-self: center;
+  }
 }

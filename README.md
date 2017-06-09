@@ -104,3 +104,7 @@ Bryant's primary responsibilities will be:
 - Create Header/Footer. (Bryant)
 - Create example modal that will demonstrate how the site works. (Audrey)
 - Production README and grab screenshots/GIFS. (Bryant)
+
+## Additional Features
+- Add a print log, that will output print statement in code
+- Add classes, to visually display classname and global variables

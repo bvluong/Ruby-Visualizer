@@ -2,6 +2,7 @@
 
   <div class='body-section'>
     <div class='code-input'>
+      {{updateInputCode}}
         <Editor  id='editor' v-model="userInput"
         lang="ruby" theme="xcode"  height="400" width="100%"></Editor>
 
@@ -42,6 +43,11 @@ import 'brace/theme/xcode';
 import { mapActions } from 'vuex';
 import DisplayCode from './display_code';
 export default {
+  watch: {
+    userInput: function() {
+      this.$emit("updateCode", this.userInput)
+    }
+  },
   computed: {
     forwardStack () {
      return this.$store.state.code
@@ -55,24 +61,14 @@ export default {
       } else {
         return 0;
       }
+    },
+    updateInputCode() {
+      this.userInput = this.sampleCode
     }
   },
   data: function () {
     return {
-      userInput:
-      `def sum_arr(arr)
-      return 0 if arr.length == 0
-    x = 1
-    h = {two: 2}
-    y = 'bye'
-    sum_arr(arr[1..-1])
-    s= :hello
-    b = true
-    if  arr.length < 1
-        return 0
-        end
-        end
-    sum_arr([1,2,3,4])`,
+      userInput: this.sampleCode,
       backwardStack: [],
       previousLine: false,
       stackFrame: 0,
@@ -133,6 +129,7 @@ export default {
       }
     },
     ...mapActions(['submitCode'])
-  }
+  },
+  props: ['sampleCode']
 }
 </script>
