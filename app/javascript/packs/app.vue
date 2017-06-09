@@ -2,7 +2,6 @@
   <div id="app">
     <Banner></Banner>
     <CodeInput v-on:updateCode="updateUserInput" :sampleCode="sampleCode"></CodeInput>
-    <span class='divide'></span>
     <Foot v-on:updateCode="updateUserInput"></Foot>
   </div>
 </template>

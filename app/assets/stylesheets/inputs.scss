@@ -6,7 +6,8 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
-  box-shadow: 3px 3px 3px rgba(255,255,255, .5)
+  // box-shadow: 3px 3px 3px rgba(255,255,255, .5);
+  flex: 8;
 }
 
 button {
@@ -16,14 +17,26 @@ button {
   background: #eff3f6;
   color: black;
   font-size: 15px;
-  background-color: #d8d8d8;
-  border: 1px solid #c8c8c8;
+  background-color: transparent;
 }
 
 button:hover{
   background-color: #e8e8e8;
 }
 
+#fa-controls {
+  height: 25px;
+  width: 100px;
+  text-align: center;
+  line-height: 1.5rem;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.fa:hover {
+  cursor: pointer;
+  background: #f5f5f5;
+}
 
 #editor {
   border: 1px solid #d8d8d8;
@@ -54,6 +67,14 @@ button:hover{
   }
 }
 
+// .run{
+//   background-color: #7acaca;
+// }
+//
+// .fa-play{
+//   background: transparent;
+// }
+
 
 .myMarker {
   position:absolute;
@@ -63,4 +84,11 @@ button:hover{
 
 .frame-count {
   align-self: center;
+}
+
+.big-arrow{
+  font-size: 36px;
+  font-weight: bold;
+  display: none;
+  padding-top: 50px;
 }

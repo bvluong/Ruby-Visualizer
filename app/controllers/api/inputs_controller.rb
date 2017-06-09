@@ -1,6 +1,7 @@
 require 'binding_of_caller'
 require 'json'
 require_relative 'my_stack'
+require 'eval-in'
 
 class Api::InputsController < ApplicationController
 
@@ -14,7 +15,7 @@ end
 
 class Eval
 
-  attr_reader :stack_history
+  attr_reader :stack_history, :status
 
   def initialize(code)
     @code = code
@@ -25,12 +26,26 @@ class Eval
     @return = nil
     @error_counter = 0
     @stack_history_counter = 0
+    @status = false
+  end
+
+  def eval_in_sandbox
+    if @code == ""
+      @stack_history.push({ errors: "Error: Code may not be empty"})
+    else
+      result = EvalIn.eval(:ruby,@code)
+      if result.status[0..1] == "OK"
+        @status = true
+      else
+        @stack_history.push({ errors: "Error: #{result.status}"})
+      end
+    end
   end
 
   def evaluate
     begin
     $SAFE = 1
-    eval(@code)
+    @return = eval(@code)
     rescue => e
       @errors << e
     rescue SyntaxError => e
@@ -54,9 +69,7 @@ class Eval
       evaluate
     end
     if @error_counter > 9999
-      p @error_counter
       @stack_history.push({errors: "Error: Your code exceeded 9999 stacks, you are probably in an infinite loop or stack overflow"})
-      p @stack_history
     else
       trace
     end

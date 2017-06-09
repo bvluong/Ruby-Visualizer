@@ -3,7 +3,6 @@
   flex-direction: column;
   border: 1px solid #d8d8d8;
   background-color: white;
-  // border-radius: 5px;
 
 }
 
@@ -12,23 +11,28 @@
   justify-content: flex-start;
   align-content: flex-start;
   align-items: center;
-  // padding: 5px;
-  h3{
-    padding-right: 10px;
-    color: #008080
+  background-color: #393e46;
+  h3, h4{
+    padding: 0 5px 2px 5px;
+    color: white;
   }
 }
 
 
-.variable, .variable-box {
+.variable {
   display: flex;
   justify-content: flex-start;;
   align-items: center;
+}
+
+.variable, .varialbe-cols{
   padding: 1px 5px 1px 5px;
 }
 
+
+
 .green {
-  color: #008080;
+  color: #26b3a9;
 }
 
 .blue {
@@ -36,9 +40,10 @@
 }
 
 .variable-type{
-  // background-color: #e8e8e8;
-  flex: 2;
+  width: 50px;
   text-align: left;
+  font-size: 14px;
+  color: #606875;
 }
 
 ul {
@@ -46,7 +51,8 @@ ul {
 }
 
 .variable-name{
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 18px;
   padding-left: 10px;
   flex: 2;
   text-align: left;
@@ -60,4 +66,20 @@ ul {
 .variable-val{
   flex: 6;
   text-align: left;
+}
+
+.variable-cols{
+  display: flex;
+  padding: 1px 5px 1px 5px;
+  color: #26b3a9;
+}
+
+.not-bold{
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.fa-long-arrow-right{
+  font-size: 16px;
+  transform: scale(5,1.5);
 }

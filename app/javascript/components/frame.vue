@@ -1,11 +1,17 @@
 <template>
   <div>
-    <ul class='box-header'>
-      <h3>{{name}}</h3>
-      <h4>[{{'stack no: ' + stackNum}}]</h4>
-    </ul>
-    <ul class='frame-box' v-bind:style="{ width: boxWidth + '%', border: '1px solid ' + borderColor}">
+    <ul class='frame-box' v-bind:style="{ width: boxWidth + '%'}">
+      <ul class='box-header' v-bind:style="{background: borderColor}">
+        <h3>{{name}}</h3>
+        <h4>[{{'stack no: ' + stackNum}}]</h4>
+      </ul>
       {{getVariables}}
+      <ul class='variable-cols'>
+        <li class='variable-type not-bold'>Type</li>
+        <li class='variable-name not-bold'>Name</li>
+        <li class='variable-arrow'></li>
+        <li class='variable-val'>Value</li>
+      </ul>
       <li v-for='arr in arrays'>
         <ArrayType :array='arr'></ArrayType>
       </li>
@@ -31,8 +37,8 @@ export default {
       hashes: [],
       otherTypes: [],
       name: '',
-      boxWidth: 80,
-      borderColor: '#d8d8d8'
+      boxWidth: 90,
+      borderColor: '#393e46'
     }
   },
   created: function () {
@@ -73,7 +79,7 @@ export default {
       this.boxWidth += (this.numWidth+1)*2
     },
     changeBorder: function  () {
-      this.borderColor = this.isCurrentFrame ? '#ff0000' : '#d8d8d8'
+      this.borderColor = this.isCurrentFrame ? '#838890' : '#393e46'
     }
   }
 }
