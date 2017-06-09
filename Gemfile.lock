@@ -123,6 +123,8 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    ruby-eval-in (0.0.4)
+      nokogiri
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     sass (3.4.24)
@@ -184,6 +186,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.7)
   rails (~> 5.1.1)
+  ruby-eval-in
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
