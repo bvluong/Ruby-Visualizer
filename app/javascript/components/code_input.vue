@@ -8,24 +8,24 @@
 
       <section class="input-buttons">
         <button type="button" name="button"
-        @click="moveFirst"><< First
+        @click="moveFirst"><i class="fa fa-fast-backward" aria-hidden="true"></i> First
         </button>
         <button type="button" name="button"
-        @click="moveBackward">< Back
+        @click="moveBackward"><i class="fa fa-step-backward" aria-hidden="true"></i> Back
         </button>
         <div class="frame-count">
           Step {{stackFrame}} of {{ codeLength }}
         </div>
         <button type="button" name="button"
-        @click="moveForward">Forward >
+        @click="moveForward">Forward <i class="fa fa-step-forward" aria-hidden="true"></i>
         </button>
         <button type="button" name="button"
-        @click="moveLast">Last >>
+        @click="moveLast">Last <i class="fa fa-fast-forward" aria-hidden="true"></i>
         </button>
       </section>
 
       <button type="button" name="button"
-      @click="runCode(userInput)">Run Code
+      @click="runCode(userInput)">Run <i class="fa fa-play" aria-hidden="true"></i>
       </button>
 
     </div>

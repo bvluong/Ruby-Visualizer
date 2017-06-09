@@ -3,7 +3,7 @@
       {{getVariables}}
       <ul>
         <h2>{{name}}</h2>
-        <h4>{{'stack no.: ' + stackNum}}</h4>
+        <h4>{{'stack no: ' + stackNum}}</h4>
       </ul>
       <li v-for='arr in arrays'>
         <ArrayType :array='arr'></ArrayType>
@@ -71,7 +71,7 @@ export default {
       this.boxWidth += (this.numWidth+1)*2
     },
     changeBorder: function  () {
-      this.borderColor = this.isCurrentFrame ? '#34dc00' : '#d8d8d8'
+      this.borderColor = this.isCurrentFrame ? '#de6668' : '#d8d8d8'
     }
   }
 }
