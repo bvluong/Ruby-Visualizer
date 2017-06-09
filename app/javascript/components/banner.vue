@@ -3,7 +3,6 @@
     <h3>Ruby Visualizer</h3>
     <nav>
       <h4>Instructions/Tag Line</h4>
-      <button type="button" name="button">Example</button>
     </nav>
   </header>
 </template>

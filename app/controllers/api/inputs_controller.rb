@@ -36,7 +36,7 @@ class Eval
       @stack_history.push({ errors: "Error: Code may not be empty"})
     else
       result = EvalIn.eval(:ruby,@code)
-      if result.status[0..1] == ("OK")
+      if result.status[0..1] == "OK"
         @status = true
       else
         @stack_history.push({ errors: "Error: #{result.status}"})

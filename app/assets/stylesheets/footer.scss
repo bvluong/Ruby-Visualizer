@@ -23,3 +23,32 @@
     align-self: center;
   }
 }
+
+.contact {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  h4 {
+    margin: 0;
+    font-size: 15px;
+    padding: 10px;
+    padding-left: 3px;
+    border: 0;
+  }
+  li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+  }
+}
+
+#fa-contact {
+  font-size: 1.7em;
+  line-height: 0.9em;
+  border: 0;
+  color: black;
+  padding: 0 5px;
+
+}

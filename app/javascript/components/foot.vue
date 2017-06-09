@@ -1,19 +1,48 @@
 <template>
   <nav class='footer'>
     <div class="examples">
-      <h4>Examples</h4>
+      <h3 class='footer-label'>Examples</h3>
       <button type="button" v-on:click="updateCode(mergeSort)">Merge Sort</button>
       <button type="button" v-on:click="updateCode(caesar_cipher)">Caesar Cipher</button>
       <button type="button" v-on:click="updateCode(check_anagram)">Check Anagram</button>
     </div>
+    <section class="">
+      <h3 class='footer-label'>Note</h3>
+      <ul>
+        <li>Inspired by Python Tutor</li>
+        <li>Future plans to do this</li>
+      </ul>
+    </section>
     <ul class="contact">
-      <h4>Contact</h4>
-      <li>Bryant</li>
-      <li>Audrey</li>
-    </ul>
-    <ul>
-      <li>Inspired by Python Tutor</li>
-      <li>Future plans to do this</li>
+      <h3 class='footer-label'>Contact</h3>
+      <li>
+        <h4>Bryant</h4>
+        <section class="contact-icons">
+          <a href="https://github.com/bvluong" target="_blank">
+            <i class="fa fa-github" id="fa-contact" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/bryant-luong/" target="_blank">
+            <i class="fa fa-linkedin" id="fa-contact" aria-hidden="true"></i>
+          </a>
+          <a href="mailto:bryantvinluong@gmail.com?Subject=Hello" target="_blank">
+            <i class="fa fa-envelope-o" id="fa-contact" aria-hidden="true"></i>
+          </a>
+        </section>
+      </li>
+      <li>
+        <h4>Audrey</h4>
+        <section class="contact-icons">
+          <a href="https://github.com/bvluong" target="_blank">
+            <i class="fa fa-github" id="fa-contact" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/bryant-luong/" target="_blank">
+            <i class="fa fa-linkedin" id="fa-contact" aria-hidden="true"></i>
+          </a>
+          <a href="mailto:bryantvinluong@gmail.com?Subject=Hello" target="_blank">
+            <i class="fa fa-envelope-o" id="fa-contact" aria-hidden="true"></i>
+          </a>
+        </section>
+      </li>
     </ul>
   </nav>
 </template>
