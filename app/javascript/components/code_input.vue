@@ -7,23 +7,16 @@
         lang="ruby" theme="xcode"  height="400" width="100%"></Editor>
 
       <section class="input-buttons">
-        <button type="button" name="button"
-        @click="moveFirst"><< First
-        </button>
-        <button type="button" name="button"
-        @click="moveBackward">< Back
-        </button>
+
+        <i class="fa fa-fast-backward" aria-hidden="true" id='fa-controls' @click="moveFirst"></i>
+        <i class="fa fa-step-backward" aria-hidden="true" id='fa-controls' @click="moveBackward"></i>
         <div class="frame-count">
           Step {{stackFrame}} of {{ codeLength }}
         </div>
-        <button type="button" name="button"
-        @click="moveForward">Forward >
-        </button>
-        <button type="button" name="button"
-        @click="moveLast">Last >>
-        </button>
-      </section>
+        <i class="fa fa-step-forward" aria-hidden="true" id='fa-controls' @click="moveForward"></i>
+        <i class="fa fa-fast-forward" aria-hidden="true" id='fa-controls' @click="moveLast"></i>
 
+      </section>
       <button type="button" name="button"
       @click="runCode(userInput)">Run Code
       </button>

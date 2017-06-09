@@ -7,6 +7,8 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem "font-awesome-rails"
+gem 'ruby-eval-in'
 gem 'rails', '~> 5.1.1'
 gem 'binding_of_caller'
 # Use sqlite3 as the database for Active Record
