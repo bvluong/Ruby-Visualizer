@@ -1,9 +1,20 @@
 .footer {
   border-top: 1px solid #d8d8d8;
   margin-top: 20px;
+  height: 200px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    width: 24.5%;
+  }
 }
 
 .examples {
@@ -25,9 +36,6 @@
 }
 
 .contact {
-  margin: 0;
-  padding: 0;
-  border: 0;
   h4 {
     margin: 0;
     font-size: 15px;

@@ -8,7 +8,6 @@ class Api::InputsController < ApplicationController
   def create
     littleEval = Eval.new(params[:input])
     littleEval.eval_in_sandbox
-    p littleEval.status
     littleEval.check_infinite if littleEval.status
     render json: littleEval.stack_history.stack_store
   end
