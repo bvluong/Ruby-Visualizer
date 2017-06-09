@@ -22,8 +22,10 @@
 import { mapActions } from 'vuex';
 
 export default {
-  computed: {
-
+  methods: {
+    updateCode: function(userInput) {
+      this.$emit('updateCode', userInput)
+    }
   },
   data: function () {
     return {
@@ -80,11 +82,6 @@ def check_anagram(str1, str2)
 end
 
 check_anagram("brite", "tribe")`
-    }
-  },
-  methods: {
-    updateCode: function(userInput) {
-      this.$emit('updateCode', userInput)
     }
   }
 }

@@ -15,11 +15,7 @@ export default {
   components: { CodeInput, Banner, Foot },
   data: function () {
     return {
-      sampleCode: `def food(e)
-    e += 1
-    return e
-end
-food(1)`
+      sampleCode: ``
     }
   },
   methods: {
