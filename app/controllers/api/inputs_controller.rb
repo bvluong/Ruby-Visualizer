@@ -29,7 +29,7 @@ class Eval
 
   def evaluate
     begin
-    # $SAFE = 1
+    $SAFE = 1
     eval(@code)
     rescue => e
       @errors << e
