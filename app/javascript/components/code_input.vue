@@ -4,7 +4,7 @@
     <div class='code-input'>
       {{updateInputCode}}
         <Editor  id='editor' v-model="userInput"
-        lang="ruby" theme="xcode"  height="400" width="100%"></Editor>
+        lang="ruby" theme="sqlserver"  height="400" width="100%"></Editor>
 
       <section class="input-buttons">
 
@@ -17,8 +17,8 @@
         <i class="fa fa-fast-forward" aria-hidden="true" id='fa-controls' @click="moveLast"></i>
 
       </section>
-      <button type="button" name="button"
-      @click="runCode(userInput)">Run Code
+      <button type="button" name="button"  class='run'
+      @click="runCode(userInput)">Run <i class="fa fa-play" aria-hidden="true"></i>
       </button>
 
     </div>
@@ -32,7 +32,7 @@
 import Editor from 'vue2-ace-editor';
 import 'brace/mode/ruby';
 import 'brace/mode/less';
-import 'brace/theme/xcode';
+import 'brace/theme/sqlserver';
 import { mapActions } from 'vuex';
 import DisplayCode from './display_code';
 export default {

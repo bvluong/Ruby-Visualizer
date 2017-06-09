@@ -2,34 +2,48 @@
   display: flex;
   flex-direction: column;
   border: 1px solid #d8d8d8;
-  ul{
-    display: flex;
-    justify-content: space-between;
-    align-content: flex-start;
-    align-items: center;
-    padding: 2px;
-    background-color: #d8d8d8;
+  background-color: white;
+
+}
+
+.box-header{
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: center;
+  background-color: #393e46;
+  h3, h4{
+    padding: 0 5px 2px 5px;
+    color: white;
   }
 }
 
-.variable, .variable-box {
+
+.variable {
   display: flex;
   justify-content: flex-start;;
   align-items: center;
 }
 
-.pink {
-  color: #c900a6;
+.variable, .varialbe-cols{
+  padding: 1px 5px 1px 5px;
+}
+
+
+
+.green {
+  color: #26b3a9;
 }
 
 .blue {
-  color: #3a00dc;
+  color: #0000ff;
 }
 
 .variable-type{
-  background-color: #e8e8e8;
-  flex: 2;
-  text-align: center;
+  width: 50px;
+  text-align: left;
+  font-size: 14px;
+  color: #606875;
 }
 
 ul {
@@ -37,18 +51,35 @@ ul {
 }
 
 .variable-name{
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 18px;
   padding-left: 10px;
   flex: 2;
   text-align: left;
 }
 
 .variable-arrow{
-  flex: 2;
+  flex: 1;
   text-align: left;
 }
 
 .variable-val{
   flex: 6;
   text-align: left;
+}
+
+.variable-cols{
+  display: flex;
+  padding: 1px 5px 1px 5px;
+  color: #26b3a9;
+}
+
+.not-bold{
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.fa-long-arrow-right{
+  font-size: 16px;
+  transform: scale(5,1.5);
 }

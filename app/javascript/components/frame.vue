@@ -1,9 +1,16 @@
 <template>
-    <ul class='frame-box' v-bind:style="{ width: boxWidth + '%', border: '2px solid ' + borderColor}">
+  <div>
+    <ul class='frame-box' v-bind:style="{ width: boxWidth + '%'}">
+      <ul class='box-header' v-bind:style="{background: borderColor}">
+        <h3>{{name}}</h3>
+        <h4>[{{'stack no: ' + stackNum}}]</h4>
+      </ul>
       {{getVariables}}
-      <ul>
-        <h2>{{name}}</h2>
-        <h4>{{'stack no.: ' + stackNum}}</h4>
+      <ul class='variable-cols'>
+        <li class='variable-type not-bold'>Type</li>
+        <li class='variable-name not-bold'>Name</li>
+        <li class='variable-arrow'></li>
+        <li class='variable-val'>Value</li>
       </ul>
       <li v-for='arr in arrays'>
         <ArrayType :array='arr'></ArrayType>
@@ -15,6 +22,7 @@
         <OtherType :other='other'></OtherType>
       </li>
     </ul>
+  </div>
 </template>
 
 <script>
@@ -29,15 +37,15 @@ export default {
       hashes: [],
       otherTypes: [],
       name: '',
-      boxWidth: 60,
-      borderColor: '#d8d8d8'
+      boxWidth: 90,
+      borderColor: '#393e46'
     }
   },
   created: function () {
     this.getWidth
     this.changeBorder
   },
-  props: ['stacks', 'stackNum', 'isCurrentFrame'],
+  props: ['stacks', 'stackNum', 'isCurrentFrame', 'numWidth'],
   computed: {
     getVariables: function () {
       let vars = Object.keys(this.stacks)
@@ -68,10 +76,10 @@ export default {
       this.otherTypes = localOtherTypes
     },
     getWidth: function () {
-      this.boxWidth += (this.stackNum+1)*2
+      this.boxWidth += (this.numWidth+1)*2
     },
     changeBorder: function  () {
-      this.borderColor = this.isCurrentFrame ? '#34dc00' : '#d8d8d8'
+      this.borderColor = this.isCurrentFrame ? '#838890' : '#393e46'
     }
   }
 }

@@ -4,19 +4,20 @@
 
 .body-section{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
+  // box-shadow: 3px 3px 3px rgba(255,255,255, .5);
+  flex: 8;
 }
 
 button {
   width: 100px;
-  height: 25px;
+  height: 40px;
   border-radius: 4px;
   background: #eff3f6;
   color: black;
   font-size: 15px;
-  background-color: #d8d8d8;
-  border: 1px solid #c8c8c8;
+  background-color: transparent;
 }
 
 button:hover{
@@ -48,6 +49,7 @@ button:hover{
   align-items: center;
   width: 50%;
   max-width: 590px;
+  padding: 5px;
 }
 
 .input-buttons {
@@ -58,12 +60,20 @@ button:hover{
   width: 100%;
   button {
     width: 80px;
-    height: 20px;
+    height: 30px;
     font-size: 12px;
     padding: 0px;
     align-items: center;
   }
 }
+
+// .run{
+//   background-color: #7acaca;
+// }
+//
+// .fa-play{
+//   background: transparent;
+// }
 
 
 .myMarker {
@@ -74,4 +84,11 @@ button:hover{
 
 .frame-count {
   align-self: center;
+}
+
+.big-arrow{
+  font-size: 36px;
+  font-weight: bold;
+  display: none;
+  padding-top: 50px;
 }

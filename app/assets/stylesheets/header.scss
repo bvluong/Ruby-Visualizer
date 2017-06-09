@@ -1,11 +1,15 @@
 header {
   height: 60px;
   width: 100%;
-  border-bottom: 1px solid #d8d8d8;
+  flex: 1;
+  // border-bottom: 1px solid #d8d8d8;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  color: white;
+  padding: 5px;
+  background-color: #222831;
   h3 {
     font-size: 30px;
     margin: 0;
