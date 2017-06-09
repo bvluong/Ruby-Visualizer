@@ -1,17 +1,18 @@
 header {
   height: 60px;
   width: 100%;
-  flex: 1;
   // border-bottom: 1px solid #d8d8d8;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
   color: white;
-  padding: 5px;
+  margin: 0;
+  border: 0;
   background-color: #222831;
   h3 {
     font-size: 30px;
+    padding-left: 8px;
+    font-weight: 100;
     margin: 0;
     align-self: center;
   }
@@ -22,6 +23,35 @@ header {
     h4 {
       align-self: center;
       padding: 0 10px;
+    }
+  }
+}
+
+
+.examples {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  h3 {
+    font-size: 25px;
+    padding: 0px;
+    margin: 5px 0px;
+    padding-right: 15px;
+  }
+  button {
+    margin: 5px 8px;
+    height: 30px;
+    font-size: 13px;
+    width: 120px;
+    padding: 0px 5px;
+    align-self: center;
+    border: 1px solid white;
+    border-radius: 3px;
+    color: white;
+    &:hover {
+      background: transparent;
+      color: #ebebeb;
     }
   }
 }

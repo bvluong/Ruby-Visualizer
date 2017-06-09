@@ -28,10 +28,14 @@
    /*other options: lato, roboto slab, droid sans, etc.*/
  }
 
- #app {
-   display: flex;
-   flex-direction: column;
- }
+ // #app {
+ //   display: flex;
+ //   flex-direction: column;
+ // }
+.main-body {
+  position: relative;
+  height: 85vh
+}
 
 nav, div {
   margin: 0;

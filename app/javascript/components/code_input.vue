@@ -1,29 +1,31 @@
 <template lang="html">
 
-  <div class='body-section'>
-    <div class='code-input'>
-      {{updateInputCode}}
-        <Editor  id='editor' v-model="userInput"
-        lang="ruby" theme="sqlserver"  height="400" width="100%"></Editor>
+  <div class="main-body">
+    <div class='body-section'>
+      <div class='code-input'>
+        {{updateInputCode}}
+          <Editor  id='editor' v-model="userInput"
+          lang="ruby" theme="sqlserver"  height="400" width="100%"></Editor>
 
-      <section class="input-buttons">
+        <section class="input-buttons">
 
-        <i class="fa fa-fast-backward" aria-hidden="true" id='fa-controls' @click="moveFirst"></i>
-        <i class="fa fa-step-backward" aria-hidden="true" id='fa-controls' @click="moveBackward"></i>
-        <div class="frame-count">
-          Step {{stackFrame}} of {{ codeLength }}
-        </div>
-        <i class="fa fa-step-forward" aria-hidden="true" id='fa-controls' @click="moveForward"></i>
-        <i class="fa fa-fast-forward" aria-hidden="true" id='fa-controls' @click="moveLast"></i>
+          <i class="fa fa-fast-backward" aria-hidden="true" id='fa-controls' @click="moveFirst"></i>
+          <i class="fa fa-step-backward" aria-hidden="true" id='fa-controls' @click="moveBackward"></i>
+          <div class="frame-count">
+            Step {{stackFrame}} of {{ codeLength }}
+          </div>
+          <i class="fa fa-step-forward" aria-hidden="true" id='fa-controls' @click="moveForward"></i>
+          <i class="fa fa-fast-forward" aria-hidden="true" id='fa-controls' @click="moveLast"></i>
 
-      </section>
-      <button type="button" name="button"  class='run'
-      @click="runCode(userInput)">Run <i class="fa fa-play" aria-hidden="true"></i>
-      </button>
+        </section>
+        <button type="button" name="button" class='run'
+        @click="runCode(userInput)">Run <i class="fa fa-play" aria-hidden="true"></i>
+        </button>
 
-    </div>
-    <div id='display-code'>
-      <DisplayCode :frame="currentFrame"></DisplayCode>
+      </div>
+      <div id='display-code'>
+        <DisplayCode :frame="currentFrame"></DisplayCode>
+      </div>
     </div>
   </div>
 </template>

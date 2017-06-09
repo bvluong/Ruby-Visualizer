@@ -8,7 +8,7 @@
       {{getVariables}}
       <ul class='variable-cols'>
         <li class='variable-type not-bold'>Type</li>
-        <li class='variable-name not-bold'>Name</li>
+        <li class='variable-name not-bold'>Variable</li>
         <li class='variable-arrow'></li>
         <li class='variable-val'>Value</li>
       </ul>
