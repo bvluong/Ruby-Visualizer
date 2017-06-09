@@ -1,10 +1,11 @@
 <template>
-    <ul class='frame-box' v-bind:style="{ width: boxWidth + '%', border: '2px solid ' + borderColor}">
+  <div>
+    <ul class='box-header'>
+      <h3>{{name}}</h3>
+      <h4>[{{'stack no: ' + stackNum}}]</h4>
+    </ul>
+    <ul class='frame-box' v-bind:style="{ width: boxWidth + '%', border: '1px solid ' + borderColor}">
       {{getVariables}}
-      <ul>
-        <h2>{{name}}</h2>
-        <h4>{{'stack no: ' + stackNum}}</h4>
-      </ul>
       <li v-for='arr in arrays'>
         <ArrayType :array='arr'></ArrayType>
       </li>
@@ -15,6 +16,7 @@
         <OtherType :other='other'></OtherType>
       </li>
     </ul>
+  </div>
 </template>
 
 <script>
@@ -29,7 +31,7 @@ export default {
       hashes: [],
       otherTypes: [],
       name: '',
-      boxWidth: 60,
+      boxWidth: 80,
       borderColor: '#d8d8d8'
     }
   },
@@ -71,7 +73,7 @@ export default {
       this.boxWidth += (this.numWidth+1)*2
     },
     changeBorder: function  () {
-      this.borderColor = this.isCurrentFrame ? '#de6668' : '#d8d8d8'
+      this.borderColor = this.isCurrentFrame ? '#ff0000' : '#d8d8d8'
     }
   }
 }

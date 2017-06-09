@@ -4,7 +4,7 @@
     <div class='code-input'>
       {{updateInputCode}}
         <Editor  id='editor' v-model="userInput"
-        lang="ruby" theme="xcode"  height="400" width="100%"></Editor>
+        lang="ruby" theme="sqlserver"  height="400" width="100%"></Editor>
 
       <section class="input-buttons">
         <button type="button" name="button"
@@ -13,7 +13,7 @@
         <button type="button" name="button"
         @click="moveBackward"><i class="fa fa-step-backward" aria-hidden="true"></i> Back
         </button>
-        <div class="frame-count">
+        <div class="frame-count green">
           Step {{stackFrame}} of {{ codeLength }}
         </div>
         <button type="button" name="button"
@@ -39,7 +39,7 @@
 import Editor from 'vue2-ace-editor';
 import 'brace/mode/ruby';
 import 'brace/mode/less';
-import 'brace/theme/xcode';
+import 'brace/theme/sqlserver';
 import { mapActions } from 'vuex';
 import DisplayCode from './display_code';
 export default {
