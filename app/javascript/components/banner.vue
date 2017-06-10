@@ -70,7 +70,9 @@ caesar_cipher("caesar cipher",8)`,
 end
 
 def check_anagram(str1, str2)
-  return get_freq(str1.downcase) == get_freq(str2.downcase)
+  str1_hash = get_freq(str1.downcase)
+  str2_hash = get_freq(str2.downcase)
+  return str1_hash == str2_hash
 end
 
 check_anagram("brite", "tribe")`

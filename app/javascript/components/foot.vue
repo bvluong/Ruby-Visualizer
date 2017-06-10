@@ -3,24 +3,21 @@
     <nav class='footer-nav'>
       <section class="footer-notes">
         <h3 class='footer-label'>Notes</h3>
-        <ul>
-          <li>Inspired by Python Tutor</li>
-          <li>Future plans to do this</li>
-        </ul>
+          <p>Ruby Visualizer project was inspired by Python Tutor. The goal of the project is to help new Ruby coders conceptualize the basic functionality of the language. In the future, we hope to expand the application to incorporate more complex aspects of Ruby's object oriented structure.</p>
       </section>
       <section class="footer-notes">
         <h3 class='footer-label'>Technology</h3>
-        <ul>
-          <li>Vuejs/ Vuex</li>
+        <ul class='technology'>
+          <li>Vuejs/Vuex</li>
           <li>Ruby on Rails</li>
-          <li>Running Ruby 2.2 using MRI </li>
+          <li>Running on Ruby 2.2 using MRI </li>
         </ul>
       </section>
       <section class="contact">
-        <h3 class='footer-label'>Contact</h3>
+        <h3 class='footer-label'>Created by</h3>
+        <h4>Bryant Luong</h4>
         <ul>
           <li>
-            <h4>Bryant Luong</h4>
             <div class="contact-icons">
               <a href="https://github.com/bvluong" target="_blank">
                 <i class="fa fa-github" id="fa-contact" aria-hidden="true"></i>
@@ -33,8 +30,8 @@
               </a>
             </div>
           </li>
+          <h4>Audrey Mefford</h4>
           <li>
-            <h4>Audrey Mefford</h4>
             <div class="contact-icons">
               <a href="https://github.com/acmeff" target="_blank">
                 <i class="fa fa-github" id="fa-contact" aria-hidden="true"></i>
