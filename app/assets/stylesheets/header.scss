@@ -14,7 +14,6 @@ header {
     padding-left: 20px;
     font-weight: 100;
     margin: 0;
-    align-self: center;
   }
   nav {
     display: flex;
@@ -24,6 +23,16 @@ header {
       align-self: center;
       padding: 0 10px;
     }
+  }
+}
+
+.slogan{
+  display: flex;
+  align-items: baseline;
+  h4{
+    padding-left: 10px;
+    font-style: italic;
+    font-weight: 200;
   }
 }
 

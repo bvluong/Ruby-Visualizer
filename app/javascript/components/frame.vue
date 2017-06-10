@@ -12,14 +12,26 @@
         <li class='variable-arrow'></li>
         <li class='variable-val'>Value</li>
       </ul>
-      <li v-for='arr in arrays'>
-        <ArrayType :array='arr'></ArrayType>
+      <li v-for='(arr, idx) in arrays'>
+        <ArrayType :array='arr' :type='idx === 0 ? a : null'></ArrayType>
       </li>
-      <li v-for='hash in hashes'>
-        <HashType :hash='hash'></HashType>
+      <li v-for='(hash, idx) in hashes'>
+        <HashType :hash='hash' :type='idx === 0 ? h : null'></HashType>
       </li>
-      <li v-for='other in otherTypes'>
-        <OtherType :other='other'></OtherType>
+      <li v-for='(string, idx) in strings'>
+        <OtherType :other='string' :type='idx === 0 ? s : null'></OtherType>
+      </li>
+      <li v-for='(symbol, idx) in symbols'>
+        <OtherType :other='symbol' :type='idx === 0 ? sy : null'></OtherType>
+      </li>
+      <li v-for='(integer, idx) in integers'>
+        <OtherType :other='integer' :type='idx === 0 ? i : null'></OtherType>
+      </li>
+      <li v-for='(float, idx) in floats'>
+        <OtherType :other='float' :type='idx === 0 ? f : null'></OtherType>
+      </li>
+      <li v-for='(boolean, idx) in booleans'>
+        <OtherType :other='boolean' :type='idx === 0 ? b : null'></OtherType>
       </li>
     </ul>
   </div>
@@ -33,12 +45,23 @@ export default {
   components: { OtherType, ArrayType, HashType },
   data: function () {
     return {
+      a: 'array',
+      h: 'hash',
+      s: 'string',
+      f: 'float',
+      i: 'integer',
+      b: 'boolean',
+      sy: 'symbol',
       arrays: [],
       hashes: [],
-      otherTypes: [],
+      strings: [],
+      integers: [],
+      floats: [],
+      symbols: [],
+      booleans: [],
       name: '',
       boxWidth: 90,
-      borderColor: '#393e46'
+      borderColor: '#37414f'
     }
   },
   created: function () {
@@ -51,7 +74,11 @@ export default {
       let vars = Object.keys(this.stacks)
       let localArrays = []
       let localHashes = []
-      let localOtherTypes = []
+      let localStrings = []
+      let localSymbols = []
+      let localBooleans = []
+      let localIntegers = []
+      let localFloats = []
       let nullVals = []
       vars.forEach((v) => {
         switch (true){
@@ -67,19 +94,42 @@ export default {
           case this.stacks[v] === null:
             nullVals.push({[v]: this.stacks[v]})
             break;
+          case typeof this.stacks[v] === 'string':
+            if (this.stacks[v].slice(this.stacks[v].length-3) === 'SYM') {
+              localSymbols.push({[v]: this.stacks[v]})
+            } else {
+              localStrings.push({[v]: this.stacks[v]})
+            }
+            break;
+          // case typeof this.other[this.otherName] === 'number':
+          //   if (this.other[this.otherName] % 1 === 0) {
+          //     localIntegers.push({[v]: this.stacks[v]})
+          //   } else {
+          //     localFloats.push({[v]: this.stacks[v]})
+          //   }
+          //   break;
+          // case typeof this.other[this.otherName] === 'boolean':
+          //     localBooleans.push({[v]: this.stacks[v]})
+          //   break;
           default:
-            localOtherTypes.push({[v]: this.stacks[v]})
-          }
+            return null
+        }
+
       })
       this.arrays = localArrays
       this.hashes = localHashes
-      this.otherTypes = localOtherTypes
+      this.strings = localStrings
+      this.symbols = localSymbols
+      this.booleans = localBooleans
+      this.integers = localIntegers
+      this.floats = localFloats
+
     },
     getWidth: function () {
       this.boxWidth += (this.numWidth+1)*2
     },
     changeBorder: function  () {
-      this.borderColor = this.isCurrentFrame ? '#838890' : '#393e46'
+      this.borderColor = this.isCurrentFrame ? '#a8b3c2' : '#37414f'
     }
   }
 }

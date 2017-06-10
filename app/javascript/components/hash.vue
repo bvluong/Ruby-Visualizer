@@ -1,15 +1,16 @@
 <template>
   <div class='variable'>
-    <li class='variable-type'>hash</li>
-      <li class='variable-name'>{{hashName}}</li>
-      <li class='variable-arrow green'><img class="arrow" src="http://res.cloudinary.com/djrgebhxz/image/upload/v1497033999/img-thing_aedlsa.jpg"/></li>
-      <li class='variable-val blue'>{{hashVal}}</li>
+    <!-- {{hash}} -->
+    <li class='variable-type'>{{type}}</li>
+    <li class='variable-name'>{{hashName}}</li>
+    <li class='variable-arrow green'><img class="arrow" src="http://res.cloudinary.com/djrgebhxz/image/upload/v1497033999/img-thing_aedlsa.jpg"/></li>
+    <li class='variable-val blue'>{{hashVal}}</li>
 </div>
 </template>
 
 <script>
 export default {
-  props: ['hash'],
+  props: ['hash', 'type'],
   computed: {
     hashName: function () {
       return Object.keys(this.hash)[0]
