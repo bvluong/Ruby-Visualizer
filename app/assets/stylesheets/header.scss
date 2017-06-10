@@ -8,7 +8,7 @@ header {
   color: white;
   margin: 0;
   border: 0;
-  background-color: #222831;
+  background: #222831;
   h3 {
     font-size: 30px;
     padding-left: 20px;
@@ -51,7 +51,7 @@ header {
     color: white;
     &:hover {
       background: transparent;
-      color: #ebebeb;
+      color: #bcbcbc;
     }
   }
 }
