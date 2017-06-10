@@ -18,14 +18,12 @@ class Eval
 
   def initialize(code)
     @code = code
-    @state = {}
     @count = 0
     @stack_history = MyStack.new
     @errors = []
     @return = nil
     @error_counter = 0
     @stack_history_counter = 0
-    @status = false
   end
 
   # def eval_in_sandbox
@@ -79,10 +77,8 @@ class Eval
   end
 
   def trace
-    counter = 0
     block_lines = getBlockLineNumbers
     tracer = TracePoint.new(:line) do |tp|
-      counter += 1
       @stack_history_counter += 1
       if @stack_history_counter < 3000
         if block_lines.any? { |x,y| tp.lineno.between?(x,y)}
@@ -104,48 +100,21 @@ class Eval
     end
   end
 
-  def retrieve_variables(lineno, blocks = false)
+  def retrieve_variables(lineno, is_block = false)
     count = 2
-    unless ["trace", "evaluate", "step", "ensure_iteration_allowed"].include?(grabMethodName(count))
-      object = {}
-      stack_frame = MyStack.new
-      swap = false
-      until grabMethodName(count) == "evaluate"
+    unless ["trace", "evaluate", "step", "ensure_iteration_allowed"].include?(get_method_name(count))
+      stack_frame, block_method = MyStack.new, false
+      until get_method_name(count) == "evaluate"
         @stack_history_counter += 1
-        count += 1 if grabMethodName(count) == "step"
-        if blocks
-          blockObj = {}
-          swap ? blockObj['method_name'] = grabMethodName(count) : blockObj['method_name'] = 'block'
-          swap = true
-          binding.of_caller(count).eval('local_variables').each do |var2|
-            curr_var2 = binding.of_caller(count+1).eval(var2.to_s)
-            if curr_var2.is_a?(Array) || curr_var2.is_a?(Hash) || curr_var2.is_a?(String)
-              blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s).deep_dup
-            elsif curr_var2.is_a?(Symbol)
-                curr_var2 = curr_var2.to_s + 'SYM'
-            # elsif curr_var2.is_a?(Hash)
-            #     curr_var2.keys.each do |k|
-            #       k = k.to_s + 'SYM' if k.is_a?(Symbol)
-            #     end
-            else
-              blockObj[var2] = curr_var2
-            end
-          end
-          stack_frame.push(blockObj)
+        count += 1 if get_method_name(count) == "step"
+        if is_block
+          function_obj = get_function_variables(block_method, count+1)
+          block_method = true
         else
-          functionObj = {'method_name' => grabMethodName(count) }
-          binding.of_caller(count).eval('local_variables').each do |var|
-            curr_var = binding.of_caller(count+1).eval(var.to_s)
-            if curr_var.is_a?(Array) || curr_var.is_a?(Hash) || curr_var.is_a?(String)
-              functionObj[var] = curr_var.deep_dup
-            elsif curr_var.is_a?(Symbol)
-                curr_var = curr_var.to_s + 'SYM'
-            else
-              functionObj[var] = curr_var
-            end
-          end
-          stack_frame.push(functionObj)
+          block_method = true
+          function_obj = get_function_variables(block_method, count+1)
         end
+        stack_frame.push(function_obj)
         count += 1
       end
       @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
@@ -153,7 +122,24 @@ class Eval
     end
   end
 
-  def grabMethodName(count)
+  def get_function_variables(swap, count)
+    methodObj = {}
+    swap ? methodObj['method_name'] = get_method_name(count) : methodObj['method_name'] = 'block'
+    binding.of_caller(count).eval('local_variables').each do |var|
+      curr_var = binding.of_caller(count+1).eval(var.to_s)
+      if curr_var.is_a?(Array) || curr_var.is_a?(Hash) || curr_var.is_a?(String)
+        methodObj[var] = binding.of_caller(count+1).eval(var.to_s).deep_dup
+      else
+        if curr_var.is_a?(Symbol)
+          curr_var = curr_var.to_s + 'SYM'
+        end
+        methodObj[var] = curr_var
+      end
+    end
+    return methodObj
+  end
+
+  def get_method_name(count)
     binding.of_caller(count+1).eval('__method__').to_s
   end
 
