@@ -74,7 +74,7 @@ end
 @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
 ```
 
-At each code line, we toss the code into our `retrieve_variables` method to obtain local variable, stack frame, and state information. `binding.of_caller` is used to obtain all variable and variable values per each stack frames until it reaches back our `evaluate` method.
+At each line, we toss the code into our `retrieve_variables` method to obtain local variables, stack frames, and state information. `binding.of_caller` is used to obtain all variables and all variable values for each stack frame until it reaches our `evaluate` method.
 
 ```ruby
 binding.of_caller(count).eval('local_variables').each do |var|
@@ -90,7 +90,7 @@ binding.of_caller(count).eval('local_variables').each do |var|
 end
 ```
 
-The series of frames accompanied with the variable information and method name is stored as a snapshot in our `stack_history`. The stack_history will be put into a JSON object and passed back to our **Vue** store. The store will pass this information to our Vue components to be parsed and visualized by data type.
+The series of frames, accompanied by variable information and method name, is stored as a snapshot in our `stack_history`. The `stack_history` will be put into a JSON object and passed back to our **Vue** store. The store will pass this information to our Vue components to be parsed and visualized by data type.
 
 ```html
 <li v-for='arr in arrays'>
@@ -104,13 +104,13 @@ The series of frames accompanied with the variable information and method name i
 </li>
 ```
 
-### Wireframes
+### Wireframe
 
-![wireframes](docs/wireframe.png)
+![wireframe](docs/wireframe2.png)
 
 ## Future Implementation
 #### Print statements
-Add a print display log, that will return print, puts, and p statement functions that user provides.
+Add a print log that will display print, puts, and p statement functions that user provides.
 #### Class visualization
 Add class types and obtain global variable information to display detailed information for each Class object.
 #### Code runtime statistics

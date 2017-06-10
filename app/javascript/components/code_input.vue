@@ -116,7 +116,7 @@ export default {
 
         let lineno = parseInt(Object.keys(this.currentFrame)[0].slice(6))
         editor.selection.clearSelection();
-        if (Object.keys(this.currentFrame)[0] == "errors") {
+        if (Object.keys(this.currentFrame)[0] == "errors" && this.backwardStack.length > 0) {
           lineno = parseInt(Object.keys(this.backwardStack[this.backwardStack.length-1])[0].slice(6))
         }
         editor.selection.moveCursorToPosition({row: lineno-1, column: 0})
