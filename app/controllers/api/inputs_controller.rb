@@ -18,14 +18,12 @@ class Eval
 
   def initialize(code)
     @code = code
-    @state = {}
     @count = 0
     @stack_history = MyStack.new
     @errors = []
     @return = nil
     @error_counter = 0
     @stack_history_counter = 0
-    @status = false
   end
 
   # def eval_in_sandbox
