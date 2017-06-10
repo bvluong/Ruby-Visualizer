@@ -2,7 +2,7 @@
   "name": "ruby_test4",
   "private": true,
   "scripts": {
-    "webpack": "webpack --watch"
+    "webpack": "webpack"
   },
   "dependencies": {
     "autoprefixer": "^7.1.1",

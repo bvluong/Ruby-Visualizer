@@ -121,10 +121,13 @@ class Eval
             curr_var2 = binding.of_caller(count+1).eval(var2.to_s)
             if curr_var2.is_a?(Array) || curr_var2.is_a?(Hash) || curr_var2.is_a?(String)
               blockObj[var2] = binding.of_caller(count+1).eval(var2.to_s).deep_dup
-            else
-              if curr_var2.is_a?(Symbol)
+            elsif curr_var2.is_a?(Symbol)
                 curr_var2 = curr_var2.to_s + 'SYM'
-              end
+            # elsif curr_var2.is_a?(Hash)
+            #     curr_var2.keys.each do |k|
+            #       k = k.to_s + 'SYM' if k.is_a?(Symbol)
+            #     end
+            else
               blockObj[var2] = curr_var2
             end
           end
@@ -135,10 +138,9 @@ class Eval
             curr_var = binding.of_caller(count+1).eval(var.to_s)
             if curr_var.is_a?(Array) || curr_var.is_a?(Hash) || curr_var.is_a?(String)
               functionObj[var] = curr_var.deep_dup
-            else
-              if curr_var.is_a?(Symbol)
+            elsif curr_var.is_a?(Symbol)
                 curr_var = curr_var.to_s + 'SYM'
-              end
+            else
               functionObj[var] = curr_var
             end
           end

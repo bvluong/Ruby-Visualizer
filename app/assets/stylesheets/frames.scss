@@ -30,18 +30,18 @@
 }
 
 .green {
-  color: #26b3a9;
+  color: #3a3ac5;
 }
 
 .blue {
-  color: #0000ff;
+  color: #3a3ac5;
 }
 
 .variable-type{
   width: 50px;
   text-align: left;
   font-size: 14px;
-  color: #606875;
+  color: red;
 }
 
 ul {
@@ -74,12 +74,13 @@ ul {
 .variable-cols{
   display: flex;
   padding: 1px 5px 1px 5px;
-  color: #26b3a9;
+  color: #606875;
 }
 
 .not-bold{
   font-weight: normal;
   font-size: 16px;
+  color: #606875;
 }
 
 .fa-long-arrow-right{
