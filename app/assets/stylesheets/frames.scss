@@ -29,8 +29,6 @@
   padding: 1px 5px 1px 5px;
 }
 
-
-
 .green {
   color: #26b3a9;
 }
@@ -53,14 +51,19 @@ ul {
 .variable-name{
   font-weight: 700;
   font-size: 18px;
-  padding-left: 10px;
-  flex: 2;
+  padding: 0 10px;
+  flex: 1;
   text-align: left;
 }
 
 .variable-arrow{
   flex: 1;
   text-align: left;
+}
+
+.arrow {
+  width: 90%;
+  height: 100%;
 }
 
 .variable-val{

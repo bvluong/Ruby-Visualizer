@@ -7,7 +7,6 @@
   justify-content: space-around;
   width: 100%;
   // box-shadow: 3px 3px 3px rgba(255,255,255, .5);
-  flex: 8;
 }
 
 button {
@@ -49,6 +48,7 @@ button:hover{
   align-items: center;
   width: 50%;
   max-width: 590px;
+  margin-top: 20px;
   padding: 5px;
 }
 
@@ -67,9 +67,13 @@ button:hover{
   }
 }
 
-// .run{
-//   background-color: #7acaca;
-// }
+.run{
+  height: 25px;
+  width: 100px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 4px;
+}
 //
 // .fa-play{
 //   background: transparent;

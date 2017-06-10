@@ -2,7 +2,7 @@
   <div class='variable'>
     <li class='variable-type'>{{getType}}</li>
       <li class='variable-name'>{{otherName}}</li>
-      <li class='variable-arrow green'><i class="fa fa-long-arrow-right" aria-hidden="true"></i></li>
+      <li class='variable-arrow green'><img class="arrow" src="http://res.cloudinary.com/djrgebhxz/image/upload/v1497033999/img-thing_aedlsa.jpg"/></li>
       <li class='variable-val blue'>{{otherVal}}</li>
   </div>
 </template>

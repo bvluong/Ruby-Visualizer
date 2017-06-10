@@ -2,7 +2,7 @@
   <div class='variable'>
     <li class='variable-type'>hash</li>
       <li class='variable-name'>{{hashName}}</li>
-      <li class='variable-arrow green'><i class="fa fa-long-arrow-right" aria-hidden="true"></i></li>
+      <li class='variable-arrow green'><img class="arrow" src="http://res.cloudinary.com/djrgebhxz/image/upload/v1497033999/img-thing_aedlsa.jpg"/></li>
       <li class='variable-val blue'>{{hashVal}}</li>
 </div>
 </template>
