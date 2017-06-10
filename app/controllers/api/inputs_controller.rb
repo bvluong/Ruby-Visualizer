@@ -79,10 +79,8 @@ class Eval
   end
 
   def trace
-    counter = 0
     block_lines = getBlockLineNumbers
     tracer = TracePoint.new(:line) do |tp|
-      counter += 1
       @stack_history_counter += 1
       if @stack_history_counter < 3000
         if block_lines.any? { |x,y| tp.lineno.between?(x,y)}

@@ -2,35 +2,46 @@
 
 ### Background
 
-Ruby Visualizer is a educational tool to help ruby beginners visualize what their code is doing at each line that is run. Back when we started learning to code, we found tools such as [Python Tutor](http://www.pythontutor.com/) extremely helpful when we were trying to conceptualize code. We wanted to contribute a similar tool geared towards the Ruby community that would be simpler to digest.
-
-### Functionality & MVP
-
-Users will be able to:
-
-- [ ] Input their code
-- [ ] See all the local variables of the code at each line
-- [ ] Move back and forth between lines of code
-- [ ] Receive errors if the code is incorrect and the piece of code that broke it
-
-### Wireframes
-
-![wireframes](docs/wireframe.png)
+Ruby Visualizer is a educational tool to help ruby beginners visualize what their code is doing at each frame of code. We were inspired by tools such as [Python Tutor](http://www.pythontutor.com/) which were extremely helpful when we were trying to learn how to code. We wanted to contribute a similar tool geared towards the Ruby community that would be simpler to digest.
 
 ### Technologies
 
 + Vue.js / Vuex
 + Ruby on Rails
-+ binding_of_caller
-+ Tracepoint
-+ Webpack
-+ Babel
++ Tracepoint / Binding_of_caller
++ Webpack / Babel
 + Yarn
-+ vue-ace-editor
++ Ace Editor
 + HTML / CSS
 + Axios
 
-Ruby Visualizer will be a one page application built with a Vue frontend and a Rails backend. Users will input code into a Vue component, which will then be passed to Rails via Axios request for parsing. The code will be received in a controller and then sent to a code evaluator function to be parsed and formatted. The evaluator will obtain the stack frames for each line of code and store a snapshot of the current variables. The series of snapshots will be put into a JSON object and passed back to the frontend state. The frontend state will handle displaying each snapshot as the user moves through their code.  
+Ruby Visualizer is a one page application built with a Vue frontend and a Rails backend. Users input code via a Vue component, which will then be passed to Rails via an Axios request. The code will be received by the controller on the backend and sent to a code evaluator to be evaluated.
+
+```ruby
+def trace
+  block_lines = getBlockLineNumbers
+  tracer = TracePoint.new(:line) do |tp|
+    @stack_history_counter += 1
+    if @stack_history_counter < 3000
+      if block_lines.any? { |x,y| tp.lineno.between?(x,y)}
+        retrieve_variables(tp.lineno, true)
+      else
+        retrieve_variables(tp.lineno)
+      end
+    else
+      @stack_history.push({ errors: "Error: stack frames exceeded" })
+      break
+    end
+  end
+```
+
+Tracepoint is utilized to
+
+ The evaluator will obtain the stack frames for each line of code and store a snapshot of the current variables. The series of snapshots will be put into a JSON object and passed back to the frontend state. The frontend state will handle displaying each snapshot as the user moves through their code.  
+
+### Wireframes
+
+![wireframes](docs/wireframe.png)
 
 #### Challenges
 
