@@ -113,8 +113,12 @@ export default {
     selectLine() {
       var editor = ace.edit('editor')
       if (this.currentFrame) {
-        const lineno = parseInt(Object.keys(this.currentFrame)[0].slice(6))
+
+        let lineno = parseInt(Object.keys(this.currentFrame)[0].slice(6))
         editor.selection.clearSelection();
+        if (Object.keys(this.currentFrame)[0] == "errors") {
+          lineno = parseInt(Object.keys(this.backwardStack[this.backwardStack.length-1])[0].slice(6))
+        }
         editor.selection.moveCursorToPosition({row: lineno-1, column: 0})
         if (this.stackFrame != 0) {
           if (this.firstRun) {
