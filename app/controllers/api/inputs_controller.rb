@@ -7,6 +7,7 @@ class Api::InputsController < ApplicationController
   def create
     littleEval = Eval.new(params[:input])
     littleEval.check_infinite
+    p littleEval.stack_history.stack_store
     render json: littleEval.stack_history.stack_store
   end
 end
@@ -117,6 +118,7 @@ class Eval
         stack_frame.push(function_obj)
         count += 1
       end
+      p stack_frame
       @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
       return @stack_history
     end

@@ -5,7 +5,7 @@
       <div class='code-input'>
         {{updateInputCode}}
           <Editor  id='editor' v-model="userInput"
-          lang="ruby" theme="sqlserver"  height="400" width="100%"></Editor>
+          lang="ruby" theme="sqlserver"  height="480" width="100%"></Editor>
 
         <section class="input-buttons">
 
