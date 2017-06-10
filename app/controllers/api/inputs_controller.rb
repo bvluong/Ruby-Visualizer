@@ -1,7 +1,6 @@
 require 'binding_of_caller'
 require 'json'
 require_relative 'my_stack'
-require 'eval-in'
 
 class Api::InputsController < ApplicationController
 
@@ -29,18 +28,18 @@ class Eval
     @status = false
   end
 
-  def eval_in_sandbox
-    if @code == ""
-      @stack_history.push({ errors: "Error: Code may not be empty"})
-    else
-      result = EvalIn.eval(:ruby,@code)
-      if result.status[0..1] == "OK"
-        @status = true
-      else
-        @stack_history.push({ errors: "Error: #{result.status}"})
-      end
-    end
-  end
+  # def eval_in_sandbox
+  #   if @code == ""
+  #     @stack_history.push({ errors: "Error: Code may not be empty"})
+  #   else
+  #     result = EvalIn.eval(:ruby,@code)
+  #     if result.status[0..1] == "OK"
+  #       @status = true
+  #     else
+  #       @stack_history.push({ errors: "Error: #{result.status}"})
+  #     end
+  #   end
+  # end
 
   def evaluate
     begin
@@ -60,18 +59,22 @@ class Eval
   end
 
   def check_infinite
-    tracer = TracePoint.new(:line) do |tp|
-      @error_counter += 1
-      if @error_counter > 9999
-        break
-      end
-    end.enable do
-      evaluate
-    end
-    if @error_counter > 9999
-      @stack_history.push({errors: "Error: Your code exceeded 9999 stacks, you are probably in an infinite loop or stack overflow"})
+    if @code == ""
+      @stack_history.push({ errors: "Error: Code may not be empty"})
     else
-      trace
+      tracer = TracePoint.new(:line) do |tp|
+        @error_counter += 1
+        if @error_counter > 9999
+          break
+        end
+      end.enable do
+        evaluate
+      end
+      if @error_counter > 9999
+        @stack_history.push({errors: "Error: Your code exceeded 9999 stacks, you are probably in an infinite loop or stack overflow"})
+      else
+        trace
+      end
     end
   end
 

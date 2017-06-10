@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Banner></Banner>
+    <Banner v-on:updateCode="updateUserInput"></Banner>
     <CodeInput v-on:updateCode="updateUserInput" :sampleCode="sampleCode"></CodeInput>
-    <Foot v-on:updateCode="updateUserInput"></Foot>
+    <Foot></Foot>
   </div>
 </template>
 
