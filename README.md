@@ -15,7 +15,7 @@ Ruby Visualizer is a educational tool to help ruby beginners visualize what thei
 + HTML / CSS
 + Axios
 
-Ruby Visualizer is a one page application built with a Vue frontend and a Rails backend. Users input code via a Vue component, which will then be passed to Rails via an Axios request. The code will be received by the controller on the backend and sent to a code evaluator to be evaluated.
+Ruby Visualizer is single page application built using a **Vue** frontend with a **Vuex** architecture to manage the flow of data. **Rails** is implemented in the backend to receive data and run our evaluators for user provided code. Users input code through a Vue component, which passes a JSON object to Rails via an **Axios** request. The code will be received by our `InputsController` to be evaluated.
 
 ```ruby
 def trace
@@ -35,7 +35,21 @@ def trace
   end
 ```
 
-Tracepoint is utilized to
+The evaluator utilizes Ruby's builtin **Tracepoint** class to define callbacks for each line of code that is evaluated at runtime. At each code line, we toss the code into our `retrieve_variables` method to obtain local variable, stack frame, and state information.
+
+```ruby
+binding.of_caller(count).eval('local_variables').each do |var|
+  curr_var = binding.of_caller(count+1).eval(var.to_s)
+  if curr_var.is_a?(Array) || curr_var.is_a?(Hash) || curr_var.is_a?(String)
+    methodObj[var] = binding.of_caller(count+1).eval(var.to_s).deep_dup
+  else
+    if curr_var.is_a?(Symbol)
+      curr_var = curr_var.to_s + 'SYM'
+    end
+    methodObj[var] = curr_var
+  end
+end
+```
 
  The evaluator will obtain the stack frames for each line of code and store a snapshot of the current variables. The series of snapshots will be put into a JSON object and passed back to the frontend state. The frontend state will handle displaying each snapshot as the user moves through their code.  
 
