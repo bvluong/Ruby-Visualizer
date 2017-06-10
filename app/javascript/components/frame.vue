@@ -101,16 +101,16 @@ export default {
               localStrings.push({[v]: this.stacks[v]})
             }
             break;
-          // case typeof this.other[this.otherName] === 'number':
-          //   if (this.other[this.otherName] % 1 === 0) {
-          //     localIntegers.push({[v]: this.stacks[v]})
-          //   } else {
-          //     localFloats.push({[v]: this.stacks[v]})
-          //   }
-          //   break;
-          // case typeof this.other[this.otherName] === 'boolean':
-          //     localBooleans.push({[v]: this.stacks[v]})
-          //   break;
+          case typeof this.stacks[v] === 'number':
+            if (this.stacks[v] % 1 === 0) {
+              localIntegers.push({[v]: this.stacks[v]})
+            } else {
+              localFloats.push({[v]: this.stacks[v]})
+            }
+            break;
+          case typeof this.stacks[v] === 'boolean':
+              localBooleans.push({[v]: this.stacks[v]})
+            break;
           default:
             return null
         }

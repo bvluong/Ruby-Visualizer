@@ -16,39 +16,16 @@ export default {
     },
     otherVal: function () {
       switch (true) {
-        case this.getType === 'string':
+        case this.type === 'string':
           return `'${this.other[this.otherName]}'`
           break
-        case this.getType === 'symbol':
+        case this.type === 'symbol':
           return `:${this.other[this.otherName].slice(0, this.other[this.otherName].length-3)}`
           break
         default:
           return this.other[this.otherName]
       }
       return this.other[this.otherName]
-    },
-    getType: function () {
-      switch (true) {
-        case typeof this.other[this.otherName] === 'string':
-          if (this.other[this.otherName].slice(this.other[this.otherName].length-3) === 'SYM') {
-            return 'symbol'
-          } else {
-            return 'string'
-          }
-          break;
-        case typeof this.other[this.otherName] === 'number':
-          if (this.other[this.otherName] % 1 === 0) {
-            return 'integer'
-          } else {
-            return 'float'
-          }
-          break;
-        case typeof this.other[this.otherName] === 'boolean':
-          return 'boolean'
-        default:
-          return null
-      }
-
     }
   }
 }
