@@ -24,7 +24,7 @@
    margin: 0;
    padding: 0;
    font-family: 'Gudea', sans-serif;
-   background-color: #f0f3fb;
+   background-color: #f3f5f7;
    /*other options: lato, roboto slab, droid sans, etc.*/
  }
 
@@ -63,3 +63,24 @@ button{
 
    box-shadow: 5px 5px 5px #d8d8d8;
  }
+
+
+.ace-sqlserver .ace_gutter {
+  background-color: #d5dae2;
+}
+
+.ace_gutter-cell {
+  background-color: transparent;
+}
+
+.ace-sqlserver .ace_gutter-active-line {
+  background-color: #f3f5f7;
+}
+
+.ace-sqlserver .ace_marker-layer .ace_active-line {
+  background-color: #f3f5f7!important;
+}
+
+.ace-sqlserver .ace_class {
+  color: #4eb14e!important2;
+}

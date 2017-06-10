@@ -1,6 +1,9 @@
 <template>
   <header>
-    <h3>Ruby Visualizer</h3>
+    <div class='slogan'>
+      <h3>Ruby Visualizer</h3>
+      <h4>View line-by-line stack frames</h4>
+    </div>
       <section class="examples">
         <h3 class='footer-label'>Examples</h3>
         <button type="button" v-on:click="updateCode(mergeSort)">Merge Sort</button>
