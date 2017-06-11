@@ -84,11 +84,8 @@ export default {
       buttonUpdate: true,
       firstRun: false,
       isDisabled: false,
-<<<<<<< HEAD
       color: "#545454",
       background: "#dbd9d9"
-=======
->>>>>>> be8b6b092d38baa6cd30dc2c903be40c7006fa37
     }
   },
   components: { Editor, DisplayCode },
