@@ -31,6 +31,7 @@ button:hover{
 #editor {
   border: 1px solid #d8d8d8;
   margin: 10px 0;
+  height: 500px;
 }
 
 .code-input {
@@ -64,6 +65,7 @@ button:hover{
   text-align: center;
   border: 1px solid black;
   border-radius: 4px;
+  font-weight: 600;
 }
 
 .myMarker {
@@ -81,4 +83,11 @@ button:hover{
   font-weight: bold;
   display: none;
   padding-top: 50px;
+}
+
+i.fa.fa-chevron-right {
+  font-size: 0.8rem;
+}
+i.fa.fa-chevron-left {
+  font-size: 0.8rem;
 }

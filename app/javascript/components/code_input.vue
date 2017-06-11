@@ -8,31 +8,30 @@
           lang="ruby" theme="sqlserver"  height="420" width="100%"></Editor>
         <section class="input-buttons">
           <button type="button" name="button" :disabled="isDisabled" @click="moveFirst"
-          :style=" isDisabled ? {color: color, background: background} : null"
-          >
-            <i class="fa fa-fast-backward" aria-hidden="true" id='fa-controls' ></i>
+          :style=" isDisabled ? {color: color, background: background} : null">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> First
           </button>
           <button type="button" name="button" :disabled="isDisabled" @click="moveBackward"
-          :style=" isDisabled ? {color: color, background: background} : null" >
-            <i class="fa fa-step-backward" aria-hidden="true" id='fa-controls'></i>
+          :style=" isDisabled ? {color: color, background: background} : null">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> Back
           </button>
           <div class="frame-count">
             Step {{stackFrame}} of {{ codeLength }}
           </div>
           <button type="button" name="button" :disabled="isDisabled" @click="moveForward"
-          :style=" isDisabled ? {color: color, background: background} : null"
-          >
-            <i class="fa fa-step-forward" aria-hidden="true" id='fa-controls' ></i>
+          :style=" isDisabled ? {color: color, background: background} : null">Next
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
           </button>
           <button type="button" name="button" :disabled="isDisabled" @click="moveLast"
-          :style=" isDisabled ? {color: color, background: background} : null"
-          >
-            <i class="fa fa-fast-forward" aria-hidden="true" id='fa-controls'></i>
+          :style=" isDisabled ? {color: color, background: background} : null">Last
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
           </button>
         </section>
         <button type="button" name="button" class='run'
           :disabled="isDisabled" :style=" isDisabled ? {color: color, background: background} : null"
-        @click="runCode(userInput)">Compile <i class="fa fa-play" aria-hidden="true"></i>
+        @click="runCode(userInput)">Compile
         </button>
 
       </div>
