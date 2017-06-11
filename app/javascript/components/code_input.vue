@@ -8,18 +8,32 @@
           lang="ruby" theme="sqlserver"  height="480" width="100%"></Editor>
 
         <section class="input-buttons">
-
-          <i class="fa fa-fast-backward" aria-hidden="true" id='fa-controls' @click="moveFirst"></i>
-          <i class="fa fa-step-backward" aria-hidden="true" id='fa-controls' @click="moveBackward"></i>
+          <button type="button" name="button" :disabled="isDisabled" @click="moveFirst"
+          :style=" isDisabled ? {color: color, background: background} : null"
+          >
+            <i class="fa fa-fast-backward" aria-hidden="true" id='fa-controls' ></i>
+          </button>
+          <button type="button" name="button" :disabled="isDisabled" @click="moveBackward"
+          :style=" isDisabled ? {color: color, background: background} : null" >
+            <i class="fa fa-step-backward" aria-hidden="true" id='fa-controls'></i>
+          </button>
           <div class="frame-count">
             Step {{stackFrame}} of {{ codeLength }}
           </div>
-          <i class="fa fa-step-forward" aria-hidden="true" id='fa-controls' @click="moveForward"></i>
-          <i class="fa fa-fast-forward" aria-hidden="true" id='fa-controls' @click="moveLast"></i>
-
+          <button type="button" name="button" :disabled="isDisabled" @click="moveForward"
+          :style=" isDisabled ? {color: color, background: background} : null"
+          >
+            <i class="fa fa-step-forward" aria-hidden="true" id='fa-controls' ></i>
+          </button>
+          <button type="button" name="button" :disabled="isDisabled" @click="moveLast"
+          :style=" isDisabled ? {color: color, background: background} : null"
+          >
+            <i class="fa fa-fast-forward" aria-hidden="true" id='fa-controls'></i>
+          </button>
         </section>
         <button type="button" name="button" class='run'
-        @click="runCode(userInput)">Run <i class="fa fa-play" aria-hidden="true" :disabled='isDisabled'></i>
+          :disabled="isDisabled" :style=" isDisabled ? {color: color, background: background} : null"
+        @click="runCode(userInput)">Run <i class="fa fa-play" aria-hidden="true"></i>
         </button>
 
       </div>
@@ -70,6 +84,8 @@ export default {
       buttonUpdate: true,
       firstRun: false,
       isDisabled: false,
+      color: "#545454",
+      background: "#dbd9d9"
     }
   },
   components: { Editor, DisplayCode },
@@ -107,7 +123,9 @@ export default {
       this.stackFrame = 1
       this.forwardStack = []
       this.backwardStack = []
-      this.submitCode(userInput)
+      this.isDisabled = true
+      this.submitCode(userInput).then(() => this.isDisabled=false,
+      err => this.isDisabled=false)
       this.buttonUpdate = true
       this.firstRun = true
     },
