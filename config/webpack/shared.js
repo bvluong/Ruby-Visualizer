@@ -1,7 +1,7 @@
 // Note: You must restart bin/webpack-dev-server for changes to take effect
 
-/* eslint global-require: 0 */
-/* eslint import/no-dynamic-require: 0 */
+// eslint global-require: 0
+// eslint import/no-dynamic-require: 0
 
 const webpack = require('webpack')
 const { basename, dirname, join, relative, resolve } = require('path')
@@ -36,6 +36,7 @@ module.exports = {
   },
 
   plugins: [
+  
     new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(env))),
     new ExtractTextPlugin(env.NODE_ENV === 'production' ? '[name]-[hash].css' : '[name].css'),
     new ManifestPlugin({
