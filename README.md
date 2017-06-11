@@ -2,7 +2,9 @@
 
 ### Background
 
-Ruby Visualizer is a educational tool to help ruby beginners visualize what their code is doing at each frame of code. We were inspired by tools such as [Python Tutor](http://www.pythontutor.com/) which were extremely helpful when we were trying to learn how to code. We wanted to contribute a similar tool geared towards the Ruby community that would be simpler to digest.
+Ruby Visualizer is a educational tool to help ruby beginners visualize what their code is doing at each line. We were inspired by tools such as [Python Tutor](http://www.pythontutor.com/) which were extremely helpful when we were trying to learn how to code. We wanted to contribute a similar tool geared towards the Ruby community that would be simpler to digest.
+
+Live Site: [Ruby Visualizer](www.rubyvisualizer.com)
 
 Created by: Audrey Mefford & Bryant Luong
 
@@ -10,32 +12,32 @@ Created by: Audrey Mefford & Bryant Luong
 
 #### Recursive Stack Display
 
-![merge-sort](docs/image/merge_sort.gif)
+![merge-sort](docs/images/merge_sort2.png)
 
-Displays all current stack frames that each method is being run in.
+Displays all active stack frames for nested methods.
 
 #### Code highlighting
 
+![highlighting](docs/images/highlighting.gif)
+
+Implement active line highlighting for code being evaluated.
+
 #### Error checker and display
 
-Return errors and highlight line of code that error was found
+![errors](docs/images/errors.png)
 
-#### Security
-
-Provides protection against shell code commands that malicious users may run.
+Display error description and highlight line of code where error occurs.
 
 ### Technologies
 
 + Vue.js / Vuex
 + Ruby on Rails
 + Tracepoint / Binding_of_caller
-+ Webpack / Babel
-+ Yarn
++ Webpack / Babel / Yarn
 + Ace Editor
-+ HTML / CSS
 + Axios
 
-Ruby Visualizer is single page application built using **Vue** for the frontend with a **Vuex** architecture to manage the data flow. **Rails** is implemented in the backend to receive data and run evaluators for user provided code. Users input code through a Vue component, which passes a JSON object to Rails via an **Axios** request. The code will be received by our `InputsController` to be evaluated.
+Ruby Visualizer is single page application built using **Vue** for the frontend with a **Vuex** architecture to manage data flow. **Rails** is implemented in the backend to receive data and run evaluators for user provided code. Users input code through a Vue component, which passes a JSON object to Rails via an **Axios** request. The code is received by our `InputsController` to be evaluated.
 
 ```ruby
 def trace
@@ -74,7 +76,7 @@ end
 @stack_history.push( { "lineno#{lineno}" => stack_frame.stack_store } )
 ```
 
-At each code line, we toss the code into our `retrieve_variables` method to obtain local variable, stack frame, and state information. `binding.of_caller` is used to obtain all variable and variable values per each stack frames until it reaches back our `evaluate` method.
+At each line, we toss the code into our `retrieve_variables` method to obtain local variables, stack frames, and state information. `binding.of_caller` is used to obtain all variables and all variable values for each stack frame until it reaches our `evaluate` method.
 
 ```ruby
 binding.of_caller(count).eval('local_variables').each do |var|
@@ -90,7 +92,7 @@ binding.of_caller(count).eval('local_variables').each do |var|
 end
 ```
 
-The series of frames accompanied with the variable information and method name is stored as a snapshot in our `stack_history`. The stack_history will be put into a JSON object and passed back to our **Vue** store. The store will pass this information to our Vue components to be parsed and visualized by data type.
+The series of frames, accompanied by variable information and method name, is stored as a snapshot in our `stack_history`. The `stack_history` will be put into a JSON object and passed back to our **Vue** store. The store will pass this information to our Vue components to be parsed and visualized by data type.
 
 ```html
 <li v-for='arr in arrays'>
@@ -104,13 +106,13 @@ The series of frames accompanied with the variable information and method name i
 </li>
 ```
 
-### Wireframes
+### Wireframe
 
-![wireframes](docs/wireframe.png)
+![wireframe](docs/wireframe2.png)
 
 ## Future Implementation
 #### Print statements
-Add a print display log, that will return print, puts, and p statement functions that user provides.
+Add a print log that will display print, puts, and p statement functions that user provides.
 #### Class visualization
 Add class types and obtain global variable information to display detailed information for each Class object.
 #### Code runtime statistics

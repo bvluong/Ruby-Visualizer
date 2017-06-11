@@ -27,6 +27,7 @@ class Eval
     @stack_history_counter = 0
   end
 
+  # alternate option for security, virtual sandbox
   # def eval_in_sandbox
   #   if @code == ""
   #     @stack_history.push({ errors: "Error: Code may not be empty"})
