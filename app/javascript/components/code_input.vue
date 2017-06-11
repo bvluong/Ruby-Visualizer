@@ -32,7 +32,7 @@
         </section>
         <button type="button" name="button" class='run'
           :disabled="isDisabled" :style=" isDisabled ? {color: color, background: background} : null"
-        @click="runCode(userInput)">Run <i class="fa fa-play" aria-hidden="true"></i>
+        @click="runCode(userInput)">Compile <i class="fa fa-play" aria-hidden="true"></i>
         </button>
 
       </div>
