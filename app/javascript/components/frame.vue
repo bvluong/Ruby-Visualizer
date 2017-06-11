@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ul class='frame-box' v-bind:style="{ width: boxWidth + '%'}">
-      <ul class='box-header' v-bind:style="{background: borderColor}">
+    <ul class='frame-box' :style="{ width: boxWidth + '%'}">
+      <ul class='box-header' :style="{background: borderColor}">
         <h3>{{name}}</h3>
         <h4>[{{'stack no: ' + stackNum}}]</h4>
       </ul>
