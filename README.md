@@ -4,7 +4,7 @@
 
 Ruby Visualizer is a educational tool to help ruby beginners visualize what their code is doing at each line. We were inspired by tools such as [Python Tutor](http://www.pythontutor.com/) which were extremely helpful when we were trying to learn how to code. We wanted to contribute a similar tool geared towards the Ruby community that would be simpler to digest.
 
-Live Site: [Ruby Visualizer](www.rubyvisualizer.com)
+Live Site: [Ruby Visualizer](http://www.rubyvisualizer.com)
 
 Created by: Audrey Mefford & Bryant Luong
 
