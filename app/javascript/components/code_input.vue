@@ -6,7 +6,6 @@
         {{updateInputCode}}
           <Editor  id='editor' v-model="userInput"
           lang="ruby" theme="sqlserver"  height="420" width="100%"></Editor>
-
         <section class="input-buttons">
           <button type="button" name="button" :disabled="isDisabled" @click="moveFirst"
           :style=" isDisabled ? {color: color, background: background} : null"
