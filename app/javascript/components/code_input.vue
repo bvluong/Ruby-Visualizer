@@ -19,7 +19,7 @@
 
         </section>
         <button type="button" name="button" class='run'
-        @click="runCode(userInput)">Run <i class="fa fa-play" aria-hidden="true"></i>
+        @click="runCode(userInput)">Run <i class="fa fa-play" aria-hidden="true" :disabled='isDisabled'></i>
         </button>
 
       </div>
@@ -68,7 +68,8 @@ export default {
       previousLine: false,
       stackFrame: 0,
       buttonUpdate: true,
-      firstRun: false
+      firstRun: false,
+      isDisabled: false,
     }
   },
   components: { Editor, DisplayCode },
