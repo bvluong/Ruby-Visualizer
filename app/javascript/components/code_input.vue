@@ -124,7 +124,8 @@ export default {
       this.forwardStack = []
       this.backwardStack = []
       this.isDisabled = true
-      this.submitCode(userInput).then(() => this.isDisabled=false )
+      this.submitCode(userInput).then(() => this.isDisabled=false,
+      err => this.isDisabled=false)
       this.buttonUpdate = true
       this.firstRun = true
     },
