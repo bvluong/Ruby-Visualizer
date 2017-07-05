@@ -6,6 +6,7 @@
         {{updateInputCode}}
           <Editor  id='editor' v-model="userInput"
           lang="ruby" theme="sqlserver"  height="420" width="100%"></Editor>
+        <vue-slider ref="slider" width="100%" :max="codeLength" v-model="stackFrame"></vue-slider>
         <section class="input-buttons">
           <button type="button" name="button" :disabled="isDisabled" @click="moveFirst"
           :style=" isDisabled ? {color: color, background: background} : null">
@@ -49,6 +50,7 @@ import 'brace/mode/less';
 import 'brace/theme/sqlserver';
 import { mapActions } from 'vuex';
 import DisplayCode from './display_code';
+import vueSlider from 'vue-slider-component';
 export default {
   watch: {
     userInput: function() {
@@ -60,11 +62,11 @@ export default {
      return this.$store.state.code
    },
     currentFrame () {
-      return this.forwardStack[0] ? this.forwardStack[0] : false
+      return this.forwardStack[this.stackFrame] ? this.forwardStack[this.stackFrame] : false
     },
     codeLength () {
       if (this.forwardStack[0]) {
-        return (this.forwardStack.length + this.backwardStack.length);
+        return (this.forwardStack.length-1);
       } else {
         return 0;
       }
@@ -76,17 +78,16 @@ export default {
   data: function () {
     return {
       userInput: this.sampleCode,
-      backwardStack: [],
       previousLine: false,
       stackFrame: 0,
       buttonUpdate: true,
       firstRun: false,
       isDisabled: false,
       color: "#545454",
-      background: "#dbd9d9"
+      background: "#dbd9d9",
     }
   },
-  components: { Editor, DisplayCode },
+  components: { Editor, DisplayCode, vueSlider },
   updated: function () {
     if (this.buttonUpdate) {
       this.selectLine()
@@ -94,33 +95,26 @@ export default {
   },
   methods: {
     moveFirst: function () {
-      while (this.backwardStack.length >= 1) {
-        this.moveBackward()
-      }
+      this.stackFrame = 0
     },
     moveLast: function () {
-      while (this.forwardStack.length > 1) {
-        this.moveForward()
-      }
+      this.stackFrame = this.codeLength
     },
     moveForward: function () {
-      if (this.forwardStack.length > 1) {
-        this.backwardStack.push(this.forwardStack.shift())
+      if (this.stackFrame < this.codeLength) {
         this.stackFrame +=1
         this.buttonUpdate = true
       }
     },
     moveBackward: function () {
-      if (this.backwardStack.length > 0) {
-        this.forwardStack.unshift(this.backwardStack.pop())
+      if (this.stackFrame > 0) {
         this.stackFrame -= 1
         this.buttonUpdate = true
       }
     },
     runCode: function(userInput) {
-      this.stackFrame = 1
+      this.stackFrame = 0
       this.forwardStack = []
-      this.backwardStack = []
       this.isDisabled = true
       this.submitCode(userInput).then(() => this.isDisabled=false,
       err => this.isDisabled=false)
@@ -132,8 +126,8 @@ export default {
       if (this.currentFrame) {
         let lineno = parseInt(Object.keys(this.currentFrame)[0].slice(6))
         editor.selection.clearSelection();
-        if (Object.keys(this.currentFrame)[0] == "errors" && this.backwardStack.length > 0) {
-          lineno = parseInt(Object.keys(this.backwardStack[this.backwardStack.length-1])[0].slice(6))
+        if (Object.keys(this.currentFrame)[0] == "errors" && this.forwardStack) {
+          lineno = parseInt(Object.keys(this.forwardStack[this.stackFrame-1])[0].slice(6))
         }
         editor.selection.moveCursorToPosition({row: lineno-1, column: 0})
         if (this.stackFrame != 0) {
