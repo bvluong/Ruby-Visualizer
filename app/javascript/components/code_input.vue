@@ -6,6 +6,7 @@
         {{updateInputCode}}
           <Editor  id='editor' v-model="userInput"
           lang="ruby" theme="sqlserver"  height="420" width="100%"></Editor>
+        <vue-slider ref="slider" width="100%" v-model="value"></vue-slider>
         <section class="input-buttons">
           <button type="button" name="button" :disabled="isDisabled" @click="moveFirst"
           :style=" isDisabled ? {color: color, background: background} : null">
@@ -49,6 +50,7 @@ import 'brace/mode/less';
 import 'brace/theme/sqlserver';
 import { mapActions } from 'vuex';
 import DisplayCode from './display_code';
+import vueSlider from 'vue-slider-component';
 export default {
   watch: {
     userInput: function() {
@@ -83,10 +85,11 @@ export default {
       firstRun: false,
       isDisabled: false,
       color: "#545454",
-      background: "#dbd9d9"
+      background: "#dbd9d9",
+      value: 1
     }
   },
-  components: { Editor, DisplayCode },
+  components: { Editor, DisplayCode, vueSlider },
   updated: function () {
     if (this.buttonUpdate) {
       this.selectLine()
