@@ -124,7 +124,6 @@ export default {
     selectLine() {
       var editor = ace.edit('editor')
       if (this.currentFrame) {
-
         let lineno = parseInt(Object.keys(this.currentFrame)[0].slice(6))
         editor.selection.clearSelection();
         if (Object.keys(this.currentFrame)[0] == "errors" && this.forwardStack) {
