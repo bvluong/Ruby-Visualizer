@@ -117,5 +117,3 @@ Add a print log that will display print, puts, and p statement functions that us
 Add class types and obtain global variable information to display detailed information for each Class object.
 #### Code runtime statistics
 Add code runtime statistics to provide information on the efficiency of code provided.
-### Slider bar navigation
-Add a slider to navigate through the code.
