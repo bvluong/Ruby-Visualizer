@@ -6,7 +6,7 @@
         {{updateInputCode}}
           <Editor  id='editor' v-model="userInput"
           lang="ruby" theme="sqlserver"  height="420" width="100%"></Editor>
-        <vue-slider ref="slider" width="100%" v-model="value"></vue-slider>
+        <vue-slider ref="slider" width="100%" :max="codeLength" v-model="value"></vue-slider>
         <section class="input-buttons">
           <button type="button" name="button" :disabled="isDisabled" @click="moveFirst"
           :style=" isDisabled ? {color: color, background: background} : null">
