@@ -66,7 +66,7 @@ export default {
     },
     codeLength () {
       if (this.forwardStack[0]) {
-        return (this.forwardStack.length);
+        return (this.forwardStack.length-1);
       } else {
         return 0;
       }
@@ -107,13 +107,13 @@ export default {
       }
     },
     moveBackward: function () {
-      if (this.stackFrame > 1) {
+      if (this.stackFrame > 0) {
         this.stackFrame -= 1
         this.buttonUpdate = true
       }
     },
     runCode: function(userInput) {
-      this.stackFrame = 1
+      this.stackFrame = 0
       this.forwardStack = []
       this.isDisabled = true
       this.submitCode(userInput).then(() => this.isDisabled=false,
