@@ -14,12 +14,14 @@ h1, h2, h3{
   list-style: none;
 }
 
+#display-code .instructions li {
+  list-style: decimal;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
 .function-list{
   display: flex;
   flex-direction: column;
   padding-left: 20px;
 }
-
-// .var-list{
-//   display: flex;
-// }
