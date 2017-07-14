@@ -6,7 +6,7 @@
         {{updateInputCode}}
           <Editor  id='editor' v-model="userInput"
           lang="ruby" theme="sqlserver"  height="420" width="100%"></Editor>
-        <vue-slider ref="slider" width="100%" :max="codeLength" v-model="stackFrame"></vue-slider>
+        <vue-slider ref="slider" width="100%" @callback="selectLine" :max="codeLength" v-model="stackFrame"></vue-slider>
         <section class="input-buttons">
           <button type="button" name="button" :disabled="isDisabled" @click="moveFirst"
           :style=" isDisabled ? {color: color, background: background} : null">
@@ -89,9 +89,7 @@ export default {
   },
   components: { Editor, DisplayCode, vueSlider },
   updated: function () {
-    if (this.buttonUpdate) {
-      this.selectLine()
-    }
+    this.selectLine()
   },
   methods: {
     moveFirst: function () {
@@ -103,13 +101,11 @@ export default {
     moveForward: function () {
       if (this.stackFrame < this.codeLength) {
         this.stackFrame +=1
-        this.buttonUpdate = true
       }
     },
     moveBackward: function () {
       if (this.stackFrame > 0) {
         this.stackFrame -= 1
-        this.buttonUpdate = true
       }
     },
     runCode: function(userInput) {
@@ -130,11 +126,6 @@ export default {
           lineno = parseInt(Object.keys(this.forwardStack[this.stackFrame-1])[0].slice(6))
         }
         editor.selection.moveCursorToPosition({row: lineno-1, column: 0})
-        if (this.stackFrame != 0) {
-          if (this.firstRun) {
-          this.buttonUpdate = false
-          }
-        }
       }
     },
     ...mapActions(['submitCode'])
