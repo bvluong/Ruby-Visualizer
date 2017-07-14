@@ -37,7 +37,7 @@
 
       </div>
       <div id='display-code'>
-        <DisplayCode :frame="currentFrame"></DisplayCode>
+        <DisplayCode :prevFrame="prevFrame" :frame="currentFrame"></DisplayCode>
       </div>
     </div>
   </div>
@@ -63,6 +63,9 @@ export default {
    },
     currentFrame () {
       return this.forwardStack[this.stackFrame] ? this.forwardStack[this.stackFrame] : false
+    },
+    prevFrame () {
+      return this.forwardStack[this.stackFrame-1] ? this.forwardStack[this.stackFrame-1] : false
     },
     codeLength () {
       if (this.forwardStack[0]) {
