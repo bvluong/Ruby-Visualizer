@@ -54,6 +54,6 @@ import Frame from './frame'
         return this.lineNo ? this.frame[this.lineNo] : []
       },
     },
-    props: ['frame']
+    props: ['frame','prevFrame']
   }
 </script>
