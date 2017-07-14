@@ -114,8 +114,6 @@ export default {
       this.isDisabled = true
       this.submitCode(userInput).then(() => this.isDisabled=false,
       err => this.isDisabled=false)
-      this.buttonUpdate = true
-      this.firstRun = true
     },
     selectLine() {
       var editor = ace.edit('editor')
