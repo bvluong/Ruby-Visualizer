@@ -54,6 +54,7 @@ import vueSlider from 'vue-slider-component';
 export default {
   watch: {
     userInput: function() {
+      this.buttonUpdate = false;
       this.$emit("updateCode", this.userInput)
     }
   },
@@ -92,24 +93,30 @@ export default {
   },
   components: { Editor, DisplayCode, vueSlider },
   updated: function () {
-    this.selectLine()
+    if (this.buttonUpdate) {
+      this.selectLine()
+    }
   },
   methods: {
     moveFirst: function () {
       this.stackFrame = 0
+      this.buttonUpdate = true;
     },
     moveLast: function () {
       this.stackFrame = this.codeLength
+      this.buttonUpdate = true;
     },
     moveForward: function () {
       if (this.stackFrame < this.codeLength) {
         this.stackFrame +=1
       }
+      this.buttonUpdate = true;
     },
     moveBackward: function () {
       if (this.stackFrame > 0) {
         this.stackFrame -= 1
       }
+      this.buttonUpdate = true;
     },
     runCode: function(userInput) {
       this.stackFrame = 0
@@ -117,6 +124,7 @@ export default {
       this.isDisabled = true
       this.submitCode(userInput).then(() => this.isDisabled=false,
       err => this.isDisabled=false)
+      this.buttonUpdate = true;
     },
     selectLine() {
       var editor = ace.edit('editor')
